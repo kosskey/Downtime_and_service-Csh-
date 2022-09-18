@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\St_Analitik\\.nuget\\packages\\": {}
+    "C:\\Users\\Kostya\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ScriptWork\\2.ConsoleCLI_Csh\\Downtime_and_service\\Downtime_and_service\\Downtime_and_service.csproj",
+      "projectUniqueName": "F:\\Костя\\IT\\Programming\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
       "projectName": "Downtime_and_service",
-      "projectPath": "D:\\ScriptWork\\2.ConsoleCLI_Csh\\Downtime_and_service\\Downtime_and_service\\Downtime_and_service.csproj",
-      "packagesPath": "C:\\Users\\St_Analitik\\.nuget\\packages\\",
-      "outputPath": "D:\\ScriptWork\\2.ConsoleCLI_Csh\\Downtime_and_service\\Downtime_and_service\\obj\\",
+      "projectPath": "F:\\Костя\\IT\\Programming\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
+      "packagesPath": "C:\\Users\\Kostya\\.nuget\\packages\\",
+      "outputPath": "F:\\Костя\\IT\\Programming\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\St_Analitik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kostya\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
