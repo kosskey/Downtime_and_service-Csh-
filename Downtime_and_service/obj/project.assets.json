@@ -1,33 +1,79 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Microsoft.Office.Interop.Excel/15.0.4795.1001": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.Excel.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.Excel.dll": {}
+        }
+      },
+      "MicrosoftOfficeCore/15.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/Office.dll": {}
+        },
+        "runtime": {
+          "lib/net35/Office.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Microsoft.Office.Interop.Excel/15.0.4795.1001": {
+      "sha512": "cuvqi/U5MYSM0gvR2l90q0m/urRgmg69EiwP5VWp1RcaJ0YT5G26Va5LaOZ3KJFc22FNihS5CUjeePUp2YpGQA==",
+      "type": "package",
+      "path": "microsoft.office.interop.excel/15.0.4795.1001",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/Microsoft.Office.Interop.Excel.dll",
+        "lib/netstandard2.0/Microsoft.Office.Interop.Excel.dll",
+        "microsoft.office.interop.excel.15.0.4795.1001.nupkg.sha512",
+        "microsoft.office.interop.excel.nuspec"
+      ]
+    },
+    "MicrosoftOfficeCore/15.0.0": {
+      "sha512": "/KgYw8uvv0Ut8FPvyEa1XJ/TrLSRgvTv3JgC2IT0/8NwoICzbEJWfmfwsE6Dwi8WH0jVkTEO7zRvGvaKqUOhqQ==",
+      "type": "package",
+      "path": "microsoftofficecore/15.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/Office.dll",
+        "microsoftofficecore.15.0.0.nupkg.sha512",
+        "microsoftofficecore.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "Microsoft.Office.Interop.Excel >= 15.0.4795.1001",
+      "MicrosoftOfficeCore >= 15.0.0"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\Kostya\\.nuget\\packages\\": {}
+    "/home/kostya/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Костя\\IT\\Programming\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
+      "projectUniqueName": "/run/media/kostya/SANDISK/IT/Development/ProgrammWork/2.ConsoleCLI_Csh/Downtime_and_service/Downtime_and_service/Downtime_and_service.csproj",
       "projectName": "Downtime_and_service",
-      "projectPath": "F:\\Костя\\IT\\Programming\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
-      "packagesPath": "C:\\Users\\Kostya\\.nuget\\packages\\",
-      "outputPath": "F:\\Костя\\IT\\Programming\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\obj\\",
+      "projectPath": "/run/media/kostya/SANDISK/IT/Development/ProgrammWork/2.ConsoleCLI_Csh/Downtime_and_service/Downtime_and_service/Downtime_and_service.csproj",
+      "packagesPath": "/home/kostya/.nuget/packages/",
+      "outputPath": "/run/media/kostya/SANDISK/IT/Development/ProgrammWork/2.ConsoleCLI_Csh/Downtime_and_service/Downtime_and_service/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Kostya\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/kostya/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -45,14 +91,23 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "Microsoft.Office.Interop.Excel": {
+            "target": "Package",
+            "version": "[15.0.4795.1001, )"
+          },
+          "MicrosoftOfficeCore": {
+            "target": "Package",
+            "version": "[15.0.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -61,8 +116,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.108/RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MicrosoftOfficeCore 15.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "MicrosoftOfficeCore",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

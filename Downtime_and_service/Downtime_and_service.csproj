@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+  <!--
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>7</VersionMinor>
@@ -26,6 +27,11 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
+  -->
+
+    <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1001" />
+
+    <PackageReference Include="MicrosoftOfficeCore" Version="15.0.0" />
   </ItemGroup>
 
 </Project>

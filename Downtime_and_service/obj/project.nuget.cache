@@ -1,8 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "937mL2LKoc4jwEHy0DSt7vU17jyZLOxayamdqy1ZljGDWH+OStAQUkTzf6RAr0GFsK3z9Iyp2SSfkB/qBSRHUw==",
+  "dgSpecHash": "GuOn9bz36pGakD7v2Zx3VrJszVNkRMOHmG8kmThzZnSbuKzJiwyg+3vF1FGgyoK9eS+DyZESiKgxxI4gDPVI4w==",
   "success": true,
-  "projectFilePath": "F:\\Костя\\IT\\Programming\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "projectFilePath": "/run/media/kostya/SANDISK/IT/Development/ProgrammWork/2.ConsoleCLI_Csh/Downtime_and_service/Downtime_and_service/Downtime_and_service.csproj",
+  "expectedPackageFiles": [
+    "/home/kostya/.nuget/packages/microsoft.office.interop.excel/15.0.4795.1001/microsoft.office.interop.excel.15.0.4795.1001.nupkg.sha512",
+    "/home/kostya/.nuget/packages/microsoftofficecore/15.0.0/microsoftofficecore.15.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MicrosoftOfficeCore 15.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "MicrosoftOfficeCore",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
