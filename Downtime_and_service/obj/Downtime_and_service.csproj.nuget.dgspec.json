@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/run/media/kostya/SANDISK/IT/Development/ProgrammWork/2.ConsoleCLI_Csh/Downtime_and_service/Downtime_and_service/Downtime_and_service.csproj": {}
+    "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj": {}
   },
   "projects": {
-    "/run/media/kostya/SANDISK/IT/Development/ProgrammWork/2.ConsoleCLI_Csh/Downtime_and_service/Downtime_and_service/Downtime_and_service.csproj": {
+    "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/run/media/kostya/SANDISK/IT/Development/ProgrammWork/2.ConsoleCLI_Csh/Downtime_and_service/Downtime_and_service/Downtime_and_service.csproj",
+        "projectUniqueName": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
         "projectName": "Downtime_and_service",
-        "projectPath": "/run/media/kostya/SANDISK/IT/Development/ProgrammWork/2.ConsoleCLI_Csh/Downtime_and_service/Downtime_and_service/Downtime_and_service.csproj",
-        "packagesPath": "/home/kostya/.nuget/packages/",
-        "outputPath": "/run/media/kostya/SANDISK/IT/Development/ProgrammWork/2.ConsoleCLI_Csh/Downtime_and_service/Downtime_and_service/obj/",
+        "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
+        "packagesPath": "C:\\Users\\St_Analitik\\.nuget\\packages\\",
+        "outputPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/kostya/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\St_Analitik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -53,7 +55,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -62,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.108/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
