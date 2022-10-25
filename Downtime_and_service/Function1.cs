@@ -133,8 +133,12 @@ namespace Downtime_and_service
             sheet_rating.Range["A22", "B34"].Copy();
 
             Excel.Worksheet sort_rating = (Excel.Worksheet)ExcelWorkBook_rating.Worksheets[d_briefly];
-            sort_rating.Range["A3"].PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues);
-            sort_rating.Range["A3", "B15"].Sort(sort_rating.Columns["A"], Excel.XlSortOrder.xlAscending);
+            var paste = Excel.XlPasteType.xlPasteValues;
+            sort_rating.Range["A3"].PasteSpecial(paste);
+            var sort = Excel.XlSortOrder.xlAscending;
+            dynamic range2 = sort_rating.Range["A3", "B15"];
+            range2.Sort(range2.Columns[1], sort);
+            //range2.Sort(range2.Columns.Item[1], sort);
         }
 
         public static void FuncClose(Excel.Application ExcelObj, Dictionary<string, string> date, string d_full, Excel.Workbook ExcelWorkBook_report, Dictionary<string, Excel.Workbook> ExcelWorkBook_sources, Excel.Workbook ExcelWorkBook_rating)
