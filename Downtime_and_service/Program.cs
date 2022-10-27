@@ -1,17 +1,24 @@
 ﻿global using Excel = Microsoft.Office.Interop.Excel;
-
+using File;
 namespace Downtime_and_service
 {
     class Program
     {
         static void Main(string[] args)
         {
+            var q = new Open_close();
+            
+            
+            /*
             var ExcelObj = new Excel.Application();
             ExcelObj.Visible = true;
             ExcelObj.WindowState = Excel.XlWindowState.xlMaximized;
+            
 
             Console.WriteLine("Введите дату отчета в формате ГГГГ.ММ.ДД");
             string? d_reverse = Console.ReadLine();
+            
+            var date = new Date(d_reverse!);
             
             var date = new Dictionary<string, string>()
             {
@@ -19,13 +26,14 @@ namespace Downtime_and_service
                 ["month"] = d_reverse.Substring(5, 2),
                 ["year"] = d_reverse.Substring(0, 4)
             };
-
+            
             string d_full = date["day"] + "." + date["month"] + "." + date["year"];
             string d_briefly = $"{date["day"]}.{date["month"]}";
+            
 
-            Excel.Workbook? ExcelWorkBook_report = null;
-            var ExcelWorkBook_sources = new Dictionary<string, Excel.Workbook>();
-            Excel.Workbook? ExcelWorkBook_rating = null;
+            Excel.Workbook? ExcelWorkBook_report = null;  //файл Отчет
+            var ExcelWorkBook_sources = new Dictionary<string, Excel.Workbook>(); //файлы Исходников
+            Excel.Workbook? ExcelWorkBook_rating = null; //файл Рейтингов
 
             while (true) {
                 Console.WriteLine("Выберите функцию:");
@@ -59,6 +67,7 @@ namespace Downtime_and_service
                     break;
                 }
             }
+            */
         }
     }
 }

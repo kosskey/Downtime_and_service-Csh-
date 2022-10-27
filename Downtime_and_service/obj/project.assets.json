@@ -19,6 +19,29 @@
         "runtime": {
           "lib/net35/Office.dll": {}
         }
+      },
+      "Date/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Date.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Date.dll": {}
+        }
+      },
+      "File/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Date": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/File.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/File.dll": {}
+        }
       }
     }
   },
@@ -47,10 +70,22 @@
         "microsoftofficecore.15.0.0.nupkg.sha512",
         "microsoftofficecore.nuspec"
       ]
+    },
+    "Date/1.0.0": {
+      "type": "project",
+      "path": "../Date/Date.csproj",
+      "msbuildProject": "../Date/Date.csproj"
+    },
+    "File/1.0.0": {
+      "type": "project",
+      "path": "../File/File.csproj",
+      "msbuildProject": "../File/File.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Date >= 1.0.0",
+      "File >= 1.0.0",
       "Microsoft.Office.Interop.Excel >= 15.0.4795.1001",
       "MicrosoftOfficeCore >= 15.0.0"
     ]
@@ -80,7 +115,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj": {
+              "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj"
+            },
+            "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj": {
+              "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -178,3 +178,7 @@ D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\
 D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\obj\Debug\net6.0\Downtime_and_service.pdb
 D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\obj\Debug\net6.0\Downtime_and_service.genruntimeconfig.cache
 D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\obj\Debug\net6.0\ref\Downtime_and_service.dll
+D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\bin\Debug\net6.0\Date.dll
+D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\bin\Debug\net6.0\File.dll
+D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\bin\Debug\net6.0\File.pdb
+D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\bin\Debug\net6.0\Date.pdb

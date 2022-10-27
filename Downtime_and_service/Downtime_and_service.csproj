@@ -34,4 +34,9 @@
     <PackageReference Include="MicrosoftOfficeCore" Version="15.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\File\File.csproj" />
+    <ProjectReference Include="..\Date\Date.csproj" />
+  </ItemGroup>
+
 </Project>
