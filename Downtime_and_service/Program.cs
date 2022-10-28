@@ -1,18 +1,16 @@
 ﻿global using Excel = Microsoft.Office.Interop.Excel;
-using File;
 namespace Downtime_and_service
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var q = new Open_close();
+            Dictionary<string, string> config = Config.Class1.Get_Config();
+            File.Open_close.Open_file(config);
             
             
             /*
-            var ExcelObj = new Excel.Application();
-            ExcelObj.Visible = true;
-            ExcelObj.WindowState = Excel.XlWindowState.xlMaximized;
+            
             
 
             Console.WriteLine("Введите дату отчета в формате ГГГГ.ММ.ДД");

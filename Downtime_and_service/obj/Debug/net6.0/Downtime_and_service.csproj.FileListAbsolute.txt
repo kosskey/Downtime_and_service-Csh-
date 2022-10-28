@@ -182,3 +182,5 @@ D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\
 D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\bin\Debug\net6.0\File.dll
 D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\bin\Debug\net6.0\File.pdb
 D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\bin\Debug\net6.0\Date.pdb
+D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\bin\Debug\net6.0\Config.dll
+D:\IT\Development\GitHub\kosskey\Downtime_and_service-Csh-\Downtime_and_service\bin\Debug\net6.0\Config.pdb

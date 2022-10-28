@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "Downtime_and_service/1.0.0": {
         "dependencies": {
+          "Config": "1.0.0",
           "Date": "1.0.0",
           "File": "1.0.0",
           "Microsoft.Office.Interop.Excel": "15.0.4795.1001",
@@ -33,6 +34,11 @@
           }
         }
       },
+      "Config/1.0.0": {
+        "runtime": {
+          "Config.dll": {}
+        }
+      },
       "Date/1.0.0": {
         "runtime": {
           "Date.dll": {}
@@ -40,7 +46,9 @@
       },
       "File/1.0.0": {
         "dependencies": {
-          "Date": "1.0.0"
+          "Date": "1.0.0",
+          "Microsoft.Office.Interop.Excel": "15.0.4795.1001",
+          "MicrosoftOfficeCore": "15.0.0"
         },
         "runtime": {
           "File.dll": {}
@@ -67,6 +75,11 @@
       "sha512": "sha512-/KgYw8uvv0Ut8FPvyEa1XJ/TrLSRgvTv3JgC2IT0/8NwoICzbEJWfmfwsE6Dwi8WH0jVkTEO7zRvGvaKqUOhqQ==",
       "path": "microsoftofficecore/15.0.0",
       "hashPath": "microsoftofficecore.15.0.0.nupkg.sha512"
+    },
+    "Config/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Date/1.0.0": {
       "type": "project",
