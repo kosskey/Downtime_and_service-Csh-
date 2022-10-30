@@ -6,6 +6,7 @@ namespace Downtime_and_service
 
         public static void FuncCopy(Excel.Application ExcelObj, Dictionary<string, string> date, string d_briefly, Excel.Workbook ExcelWorkBook_report, Dictionary<string, Excel.Workbook> ExcelWorkBook_sources, Excel.Workbook ExcelWorkBook_rating)
         {
+            /*
             FilePath Path = new FilePath(date);
             DateTime date2 = new DateTime(Int32.Parse(date["year"]), Int32.Parse(date["month"]), Int32.Parse(date["day"]));
 
@@ -46,6 +47,8 @@ namespace Downtime_and_service
             dynamic range2 = sort_rating.Range["A3", "B15"];
             range2.Sort(range2.Columns[1], sort);
             //range2.Sort(range2.Columns.Item[1], sort);
+
+            */
         }
 
         

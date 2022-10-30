@@ -1,43 +1,80 @@
 ﻿using Excel = Microsoft.Office.Interop.Excel;
-namespace File;
-public class Open_close
-{
-    private static Excel.Application Start_Excel()
-    {
-        var ExcelObj = new Excel.Application();
-        ExcelObj.Visible = true;
-        ExcelObj.WindowState = Excel.XlWindowState.xlMaximized;
+using Config;
+using Date;
 
-        return ExcelObj;
+namespace File;
+
+public class File
+{
+    //private readonly Excel.Application ExcelObj = Start_Excel();
+    //private readonly Excel.Application ExcelObj;
+
+    private readonly string name_eng;
+    private readonly string name_rus;
+    private readonly string link;
+
+    public File(string name_eng, Dictionary<string, string> config)
+    {
+        var date = new Date.Date(config["date_current_report"]);
+
+        this.name_eng = "ExcelWorkBook_" + name_eng;
+
+        if (name_eng == "report")
+        {
+            name_rus = config[this.name_eng] + config["date_previous_report"] + ".xlsm";
+        }
+        else if (name_eng == "rating")
+        {
+            name_rus = config[this.name_eng] + date.month_name[date.month] + " " + date.yaer + ".xlsx";
+        }
+        else
+        {
+            name_rus = config["folder"] + date.month_name[date.month] + " " + date.yaer + "\\" + config[this.name_eng] + ".xlsx";
+        }
+
+        link = Directory.GetCurrentDirectory() + "\\" + config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + name_rus;
     }
 
-    public static Excel.Workbook Open_file(Dictionary<string, string> config)
-        {
-            //FilePath Path = new FilePath(date);
+    public static Excel.Application Start_Excel()
+    {
+        var excelObj = new Excel.Application();
+        excelObj.Visible = true;
+        excelObj.WindowState = Excel.XlWindowState.xlMaximized;
+        return excelObj;
+    }
 
-            var date = new Date.Get_date(config["date_current_report"]);
-            Start_Excel().Workbooks.Open(config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + config["ExcelWorkBook_report"] + date.d_full + ".xlsm");
+    public Excel.Workbook Open_file(Excel.Application excel)
+    {
+        //FilePath Path = new FilePath(date);
 
-           /*
+        var workbook = excel.Workbooks.Open(link);
 
-            var ExcelWorkSheet_rating = (Excel.Worksheet)ExcelWorkBook_report!.Sheets.Item["Источник Рейтинг"];
-            ExcelWorkSheet_rating.Visible = Excel.XlSheetVisibility.xlSheetVisible;
-            ExcelObj.Run("Выкладки");
+        /*
+        var ExcelWorkSheet_rating = (Excel.Worksheet)ExcelWorkBook_report!.Sheets.Item["Источник Рейтинг"];
+        ExcelWorkSheet_rating.Visible = Excel.XlSheetVisibility.xlSheetVisible;
+        ExcelObj.Run("Выкладки");
 
-            var ExcelWorkSheet_install = (Excel.Worksheet)ExcelWorkBook_report.Sheets["Установочные"];
-            string? amount_line_old_start = (string)ExcelWorkSheet_install.Range["B2"].Text;
-            string? amount_line_old_end = Convert.ToString(Int32.Parse(amount_line_old_start) - 13);
-            string? amount_line_next_start = Convert.ToString(Convert.ToInt32(amount_line_old_start) + 1);
-            string? amount_line_next_end = Convert.ToString(Convert.ToInt32(amount_line_old_start) + 14);
+        var ExcelWorkSheet_install = (Excel.Worksheet)ExcelWorkBook_report.Sheets["Установочные"];
+        string? amount_line_old_start = (string)ExcelWorkSheet_install.Range["B2"].Text;
+        string? amount_line_old_end = Convert.ToString(Int32.Parse(amount_line_old_start) - 13);
+        string? amount_line_next_start = Convert.ToString(Convert.ToInt32(amount_line_old_start) + 1);
+        string? amount_line_next_end = Convert.ToString(Convert.ToInt32(amount_line_old_start) + 14);
             
-            ExcelWorkSheet_rating.Range["A" + amount_line_old_start + ":AC" + amount_line_old_end].Copy();
-            ExcelWorkSheet_rating.Paste(ExcelWorkSheet_rating.Range["A" + amount_line_next_start]);
-            DateTime date1 = new DateTime(Int32.Parse(date["year"]), Int32.Parse(date["month"]), Int32.Parse(date["day"]));
-            ExcelWorkSheet_rating.Range["B" + amount_line_next_start + ":B" + amount_line_next_end].Value = date1;
-    */
-            return null!;
-            
-        }
+        ExcelWorkSheet_rating.Range["A" + amount_line_old_start + ":AC" + amount_line_old_end].Copy();
+        ExcelWorkSheet_rating.Paste(ExcelWorkSheet_rating.Range["A" + amount_line_next_start]);
+        DateTime date1 = new DateTime(Int32.Parse(date["year"]), Int32.Parse(date["month"]), Int32.Parse(date["day"]));
+        ExcelWorkSheet_rating.Range["B" + amount_line_next_start + ":B" + amount_line_next_end].Value = date1;
+        */
+
+        return workbook;
+    }
+
+    public Excel.Worksheet Activate_sheet(Excel.Workbook workbook, string name_sheet)
+    {
+        var worksheet = (Excel.Worksheet)workbook.Sheets.Item[name_sheet];
+        
+        return worksheet;
+    }
 
     /*
         public static object FuncOpen2(Excel.Application ExcelObj, Dictionary<string, string> date, string d_briefly, Dictionary<string, Excel.Workbook> ExcelWorkBook_sources)

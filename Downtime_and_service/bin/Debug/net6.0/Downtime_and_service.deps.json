@@ -46,6 +46,7 @@
       },
       "File/1.0.0": {
         "dependencies": {
+          "Config": "1.0.0",
           "Date": "1.0.0",
           "Microsoft.Office.Interop.Excel": "15.0.4795.1001",
           "MicrosoftOfficeCore": "15.0.0"

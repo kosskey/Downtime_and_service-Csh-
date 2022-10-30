@@ -1,12 +1,13 @@
 ﻿namespace Config;
-public class Class1
+
+public class Config
 {
     public static Dictionary<string, string> Get_Config()
     {
         var config_dict = new Dictionary<string, string>();
         String line;
 
-        StreamReader sr = new StreamReader(Directory.GetParent(Directory.GetCurrentDirectory()) + "\\Config\\Config.txt");
+        StreamReader sr = new StreamReader(Directory.GetCurrentDirectory() + "\\Config.txt");
         line = sr.ReadLine()!;
         while (line != null)
         {
