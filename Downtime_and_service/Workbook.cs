@@ -1,3 +1,5 @@
+using System;
+
 namespace Downtime_and_service;
 
 class ClassWorkbook
@@ -16,8 +18,10 @@ class ClassWorkbook
             
         excelWorkSheet_rating.Range["A" + amount_line_old_start + ":AC" + amount_line_old_end].Copy();
         excelWorkSheet_rating.Paste(excelWorkSheet_rating.Range["A" + amount_line_next_start]);
-        DateTime date1 = new DateTime(Int32.Parse(config["year"]), Int32.Parse(config["month"]), Int32.Parse(config["day"]));
-        excelWorkSheet_rating.Range["B" + amount_line_next_start + ":B" + amount_line_next_end].Value = date1;
+        //DateTime date1 = new DateTime(Int32.Parse(config["year"]), Int32.Parse(config["month"]), Int32.Parse(config["day"]));
+        //DateTime date2 = DateTime.Parse(config["date_current_report"]);
+        DateTime date = Convert.ToDateTime(config["date_current_report"]);
+        excelWorkSheet_rating.Range["B" + amount_line_next_start + ":B" + amount_line_next_end].Value = date;
     }
 
     public static void Report_copy()
@@ -25,59 +29,48 @@ class ClassWorkbook
 
     }
 
-    public void Operators_CA()
+    public static void Sources_create(Dictionary<string, string> config, File.ClassFile sources_config, Excel.Workbook excelWorkBook_sources)
     {
-        
+        int last_sheet = excelWorkBook_sources.Worksheets.Count;
 
-        //excelWorkBook_operators_CA.Close();
+        int checker = 0;
+        foreach (Excel.Worksheet sheet_existing in excelWorkBook_sources.Sheets)
+        {
+            if (sheet_existing.Name == config["date_current_report"].Substring(0, 5))
+            {
+                checker = 1;
+            }
+        }
+        if (checker == 1)
+        {
+            var ExcelWorkSheet_sheet1 = (Excel.Worksheet)excelWorkBook_sources.Worksheets.Add(System.Reflection.Missing.Value, excelWorkBook_sources.Worksheets[last_sheet]);
+            ExcelWorkSheet_sheet1.Name = "Лист1";
+        }
+        else
+        {
+            var ExcelWorkSheet_brefly = (Excel.Worksheet)excelWorkBook_sources.Worksheets.Add(System.Reflection.Missing.Value, excelWorkBook_sources.Worksheets[last_sheet]);
+            ExcelWorkSheet_brefly.Name = config["date_current_report"].Substring(0, 5);
+        }
+
+        var ExcelWorkSheet_install = sources_config.Activate_sheet(excelWorkBook_sources, "Установочные");
+        ExcelWorkSheet_install.Range["B1"].Value = config["date_current_report"].Substring(0, 5);
     }
 
-    public void Operators_CC()
+    public static void Sources_copy()
     {
 
-
-        //excelWorkBook_operators_CC.Close();
     }
 
-    public void Technician()
+    public static void Rating_create(Dictionary<string, string> config, Excel.Application excel, File.ClassFile rating_config, Excel.Workbook excelWorkBook_rating)
     {
-
-
-        //excelWorkBook_technician.Close();
+        int last_sheet = excelWorkBook_rating.Worksheets.Count;
+        var ExcelWorkSheet_new_list = (Excel.Worksheet)excelWorkBook_rating.Worksheets.Add(System.Reflection.Missing.Value, excelWorkBook_rating.Worksheets[last_sheet]);
+        ExcelWorkSheet_new_list.Name = config["date_current_report"].Substring(0, 5);
+        ExcelWorkSheet_new_list.Range["A1"].Value = "Рейтинг подразделений по 4 показателям за " + config["date_current_report"];
     }
 
-    public void Revenue()
+    public static void Rating_copy()
     {
 
-
-        //excelWorkBook_revenue.Close();
-    }
-
-    public void Amount()
-    {
-
-
-        //excelWorkBook_amount.Close();
-    }
-
-    public void Not_connection()
-    {
-
-
-        //excelWorkBook_not_connection.Close();
-    }
-
-    public void Not_work()
-    {
-
-
-        //excelWorkBook_not_work.Close();
-    }
-
-    public void Rating()
-    {
-
-
-        //excelWorkBook_rating.Close();
     }
 }

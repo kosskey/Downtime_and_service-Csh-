@@ -1,20 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj": {}
+    "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj": {}
   },
   "projects": {
-    "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj": {
+    "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj",
+        "projectUniqueName": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj",
         "projectName": "Config",
-        "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj",
-        "packagesPath": "C:\\Users\\St_Analitik\\.nuget\\packages\\",
-        "outputPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\obj\\",
+        "projectPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj",
+        "packagesPath": "C:\\Users\\Kostya\\.nuget\\packages\\",
+        "outputPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\St_Analitik\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Kostya\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -54,21 +55,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "D:\\IT\\Development\\Stack\\NET\\dotnet-sdk-6.0.402-win-x64\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj": {
+    "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj",
+        "projectUniqueName": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj",
         "projectName": "Date",
-        "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj",
-        "packagesPath": "C:\\Users\\St_Analitik\\.nuget\\packages\\",
-        "outputPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\obj\\",
+        "projectPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj",
+        "packagesPath": "C:\\Users\\Kostya\\.nuget\\packages\\",
+        "outputPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\St_Analitik\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Kostya\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -108,21 +110,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "D:\\IT\\Development\\Stack\\NET\\dotnet-sdk-6.0.402-win-x64\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj": {
+    "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
+        "projectUniqueName": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
         "projectName": "Downtime_and_service",
-        "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
-        "packagesPath": "C:\\Users\\St_Analitik\\.nuget\\packages\\",
-        "outputPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\obj\\",
+        "projectPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\Downtime_and_service.csproj",
+        "packagesPath": "C:\\Users\\Kostya\\.nuget\\packages\\",
+        "outputPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\St_Analitik\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Kostya\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -135,14 +138,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj": {
-                "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj"
+              "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj": {
+                "projectPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj"
               },
-              "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj": {
-                "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj"
+              "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj": {
+                "projectPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj"
               },
-              "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj": {
-                "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj"
+              "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj": {
+                "projectPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj"
               }
             }
           }
@@ -182,21 +185,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "D:\\IT\\Development\\Stack\\NET\\dotnet-sdk-6.0.402-win-x64\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj": {
+    "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj",
+        "projectUniqueName": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj",
         "projectName": "File",
-        "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj",
-        "packagesPath": "C:\\Users\\St_Analitik\\.nuget\\packages\\",
-        "outputPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\obj\\",
+        "projectPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\File.csproj",
+        "packagesPath": "C:\\Users\\Kostya\\.nuget\\packages\\",
+        "outputPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\File\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\St_Analitik\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Kostya\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -209,11 +213,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj": {
-                "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj"
+              "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj": {
+                "projectPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Config\\Config.csproj"
               },
-              "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj": {
-                "projectPath": "D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj"
+              "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj": {
+                "projectPath": "F:\\Костя\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Date\\Date.csproj"
               }
             }
           }
@@ -253,7 +257,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "D:\\IT\\Development\\Stack\\NET\\dotnet-sdk-6.0.402-win-x64\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
