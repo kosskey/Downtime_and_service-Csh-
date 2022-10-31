@@ -4,7 +4,7 @@ using Date;
 namespace UnitTest;
 
 [TestClass]
-public class UnitTest1
+public class ClassUnitTest
 {
     [TestMethod]
     public void TestMethod_Date()
@@ -14,7 +14,7 @@ public class UnitTest1
         string[] commands = { "day", "month", "year", "d_full", "d_briefly" };
         string[] results = { "27", "10", "2022", "27.10.2022", "27.10" };
 
-        var q = new Date.Date(date);
+        var q = new Date.ClassDate(date);
         foreach (var command in commands)
         {
             //act

@@ -1,5 +1,5 @@
 ﻿namespace Date;
-public class Date
+public class ClassDate
 {
     private string date;
     public string day;
@@ -23,7 +23,7 @@ public class Date
         ["12"] = "Декабрь"
     };
 
-    public Date(string date)
+    public ClassDate(string date)
     {
         this.date = date;
         day = date.Substring(0, 2);

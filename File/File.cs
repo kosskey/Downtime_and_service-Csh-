@@ -1,10 +1,6 @@
-﻿using Excel = Microsoft.Office.Interop.Excel;
-using Config;
-using Date;
+﻿namespace File;
 
-namespace File;
-
-public class File
+public class ClassFile
 {
     //private readonly Excel.Application ExcelObj = Start_Excel();
     //private readonly Excel.Application ExcelObj;
@@ -13,9 +9,9 @@ public class File
     private readonly string name_rus;
     private readonly string link;
 
-    public File(string name_eng, Dictionary<string, string> config)
+    public ClassFile(string name_eng, Dictionary<string, string> config)
     {
-        var date = new Date.Date(config["date_current_report"]);
+        var date = new Date.ClassDate(config["date_current_report"]);
 
         this.name_eng = "ExcelWorkBook_" + name_eng;
 
@@ -45,26 +41,7 @@ public class File
 
     public Excel.Workbook Open_file(Excel.Application excel)
     {
-        //FilePath Path = new FilePath(date);
-
         var workbook = excel.Workbooks.Open(link);
-
-        /*
-        var ExcelWorkSheet_rating = (Excel.Worksheet)ExcelWorkBook_report!.Sheets.Item["Источник Рейтинг"];
-        ExcelWorkSheet_rating.Visible = Excel.XlSheetVisibility.xlSheetVisible;
-        ExcelObj.Run("Выкладки");
-
-        var ExcelWorkSheet_install = (Excel.Worksheet)ExcelWorkBook_report.Sheets["Установочные"];
-        string? amount_line_old_start = (string)ExcelWorkSheet_install.Range["B2"].Text;
-        string? amount_line_old_end = Convert.ToString(Int32.Parse(amount_line_old_start) - 13);
-        string? amount_line_next_start = Convert.ToString(Convert.ToInt32(amount_line_old_start) + 1);
-        string? amount_line_next_end = Convert.ToString(Convert.ToInt32(amount_line_old_start) + 14);
-            
-        ExcelWorkSheet_rating.Range["A" + amount_line_old_start + ":AC" + amount_line_old_end].Copy();
-        ExcelWorkSheet_rating.Paste(ExcelWorkSheet_rating.Range["A" + amount_line_next_start]);
-        DateTime date1 = new DateTime(Int32.Parse(date["year"]), Int32.Parse(date["month"]), Int32.Parse(date["day"]));
-        ExcelWorkSheet_rating.Range["B" + amount_line_next_start + ":B" + amount_line_next_end].Value = date1;
-        */
 
         return workbook;
     }
@@ -74,6 +51,11 @@ public class File
         var worksheet = (Excel.Worksheet)workbook.Sheets.Item[name_sheet];
         
         return worksheet;
+    }
+
+    public static void Close_file(Excel.Workbook workbook)
+    {
+        workbook.Close();
     }
 
     /*

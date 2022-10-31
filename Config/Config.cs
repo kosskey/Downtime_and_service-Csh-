@@ -1,6 +1,6 @@
 ﻿namespace Config;
 
-public class Config
+public class ClassConfig
 {
     public static Dictionary<string, string> Get_Config()
     {
