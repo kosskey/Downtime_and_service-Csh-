@@ -6,9 +6,10 @@ public class ClassFile
     //private readonly Excel.Application ExcelObj;
 
     private readonly string name_eng;
-    private readonly string name_rus;
+    public readonly string name_rus;
     private readonly string link_file;
     private readonly string full_link;
+    public readonly string save_link;
 
     public ClassFile(string name_eng, Dictionary<string, string> config)
     {
@@ -31,6 +32,7 @@ public class ClassFile
         }
 
         full_link = config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + link_file;
+        save_link = config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + "Отчет по простоям и сервису_" + config["date_current_report"] + ".xlsm";
     }
 
     public static Excel.Application Start_Excel()
@@ -69,33 +71,4 @@ public class ClassFile
             workbook.Close();
         }
     }
-
-    /*
-    public static void FuncClose(Excel.Application ExcelObj, Dictionary<string, string> date, string d_full, Excel.Workbook ExcelWorkBook_report, Dictionary<string, Excel.Workbook> ExcelWorkBook_sources, Excel.Workbook ExcelWorkBook_rating)
-        {
-            FilePath Path = new FilePath(date);
-
-            var ExcelWorkSheet = (Excel.Worksheet)ExcelWorkBook_report.Sheets.Item["Источник Рейтинг"];
-            ExcelWorkSheet.Activate();
-            ExcelObj.Run("Выкладки");
-            ExcelWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;
-            //Format-List -Property Name, Index -InputObject $ExcelWorkBook_report.Sheets.Item("Рейтинг")
-            var ExcelWorkSheet_active = (Excel.Worksheet)ExcelWorkBook_report.Sheets[1];
-            ExcelWorkSheet_active.Activate();
-            ExcelObj.DisplayAlerts = false;
-            ExcelWorkBook_report.SaveAs(Path.path_directory + "Отчет по простоям и сервису_" + d_full + ".xlsm", Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
-            ExcelWorkBook_report.Close();
-
-            //foreach (key in ExcelWorkBook_sources.Keys) {ExcelWorkBook_sources[key].Save() ExcelWorkBook_sources[key].Close()}
-
-            foreach (string node in Path.source_name_eng)
-            {
-                ExcelWorkBook_sources[node].Save();
-                ExcelWorkBook_sources[node].Close();
-            };
-
-            ExcelWorkBook_rating.Save();
-            ExcelWorkBook_rating.Close();
-        }
-    */
 }
