@@ -7,28 +7,30 @@ public class ClassFile
 
     private readonly string name_eng;
     private readonly string name_rus;
-    private readonly string link;
+    private readonly string link_file;
+    private readonly string full_link;
 
     public ClassFile(string name_eng, Dictionary<string, string> config)
     {
         var date = new Date.ClassDate(config["date_current_report"]);
 
         this.name_eng = "ExcelWorkBook_" + name_eng;
+        name_rus = config[this.name_eng];
 
         if (name_eng == "report")
         {
-            name_rus = config[this.name_eng] + config["date_previous_report"] + ".xlsm";
+            link_file = config[this.name_eng] + config["date_previous_report"] + ".xlsm";
         }
         else if (name_eng == "rating")
         {
-            name_rus = config[this.name_eng] + date.month_name[date.month] + " " + date.yaer + ".xlsx";
+            link_file = config[this.name_eng] + date.month_name[date.month] + " " + date.yaer + ".xlsx";
         }
         else
         {
-            name_rus = config["folder"] + date.month_name[date.month] + " " + date.yaer + "\\" + config[this.name_eng] + ".xlsx";
+            link_file = config["folder"] + date.month_name[date.month] + " " + date.yaer + "\\" + config[this.name_eng] + ".xlsx";
         }
 
-        link = config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + name_rus;
+        full_link = config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + link_file;
     }
 
     public static Excel.Application Start_Excel()
@@ -41,7 +43,7 @@ public class ClassFile
 
     public Excel.Workbook Open_file(Excel.Application excel)
     {
-        var workbook = excel.Workbooks.Open(link);
+        var workbook = excel.Workbooks.Open(full_link);
 
         return workbook;
     }
@@ -51,6 +53,13 @@ public class ClassFile
         var worksheet = (Excel.Worksheet)workbook.Sheets.Item[name_sheet];
         
         return worksheet;
+    }
+
+    public Excel.Range Activate_range(Excel.Worksheet worksheet, int row, int column)
+    {
+        var workrange = (Excel.Range)worksheet.Cells.Item[row, column];
+        
+        return workrange;
     }
 
     public static void Close_file(Excel.Workbook workbook)

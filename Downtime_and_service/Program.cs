@@ -16,6 +16,9 @@ class ClassProgram
         Excel.Workbook? excelWorkBook_not_work = null;
         Excel.Workbook? excelWorkBook_rating = null;
 
+        File.ClassFile? report_config = null;
+        File.ClassFile? operators_CA_config = null;
+
         Console.WriteLine("Дата текущего отчета: " + config["date_current_report"]);
         Console.WriteLine("Дата предыдущего отчета: " + config["date_previous_report"]);
 
@@ -33,11 +36,11 @@ class ClassProgram
             {
                 var excel = File.ClassFile.Start_Excel();
                 
-                var report_config = new File.ClassFile("report", config);
+                report_config = new File.ClassFile("report", config);
                 excelWorkBook_report = report_config.Open_file(excel);
                 ClassWorkbook.Report_create(config, excel, report_config, excelWorkBook_report);
 
-                var operators_CA_config = new File.ClassFile("operators_CA", config);
+                operators_CA_config = new File.ClassFile("operators_CA", config);
                 excelWorkBook_operators_CA = operators_CA_config.Open_file(excel);
                 ClassWorkbook.Sources_create(config, operators_CA_config, excelWorkBook_operators_CA);
 
@@ -72,6 +75,8 @@ class ClassProgram
             else if(v == "2")
             {
                 //FileAction.FuncCopy(ExcelObj, date, d_briefly, ExcelWorkBook_report!, ExcelWorkBook_sources, //ExcelWorkBook_rating!);
+
+                ClassWorkbook.Sources_copy(config, operators_CA_config!, excelWorkBook_operators_CA!, excelWorkBook_report!, 0);
             }
             else if(v == "3")
             {

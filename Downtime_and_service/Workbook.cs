@@ -56,9 +56,33 @@ class ClassWorkbook
         ExcelWorkSheet_install.Range["B1"].Value = config["date_current_report"].Substring(0, 5);
     }
 
-    public static void Sources_copy()
+    public static void Sources_copy(Dictionary<string, string> config, File.ClassFile sources_config, Excel.Workbook excelWorkBook_sources, Excel.Workbook excelWorkBook_report, int index)
     {
+        //var value1 = (Excel.Workbook)excelWorkBook_sources.Sheets["Установочные"];
+        var value1 = sources_config.Activate_sheet(excelWorkBook_sources, "Установочные");
+        string range = (string)value1.Range["B2"].Text;
 
+        value1.Range[range].Copy();
+        
+        //Excel.Worksheet sheet_installation = (Excel.Worksheet)ExcelWorkBook_report.Worksheets["Установочные"];
+        var sheet_installation = sources_config.Activate_sheet(excelWorkBook_sources, "Установочные");
+        //int amount_line_old = Convert.ToInt32(sheet_installation.Cells.Item[index + 3, 2].Text);
+        //var q = (Excel.Range)sheet_installation.Cells.Item[index + 3, 2];
+        var q = sources_config.Activate_range(sheet_installation, index + 3, 2);
+        int amount_line_old = Convert.ToInt32(q.Text);
+        //workbook.Activate();
+        //Excel.Worksheet worksheet = (Excel.Worksheet)ExcelWorkBook_report.Worksheets[Path.source_name_rus[index]];
+        var worksheet = sources_config.Activate_sheet(excelWorkBook_sources, sources_config.ToString()!);
+        worksheet.Range["C" + (amount_line_old + 1)].PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteValues);
+
+        //int amount_line_new = Convert.ToInt32(sheet_installation.Cells.Item[index + 3, 2].Text);
+        var q2 = (Excel.Range)sheet_installation.Cells.Item[index + 3, 2];
+        int amount_line_new = Convert.ToInt32(q2.Text);
+        
+        worksheet.Range["B" + (amount_line_old + 1), "B" + amount_line_new].Value = "date2";
+        worksheet.Range["A" + amount_line_old].Copy();
+        worksheet.Range["A" + (amount_line_old + 1), "A" + amount_line_new].PasteSpecial();
+    
     }
 
     public static void Rating_create(Dictionary<string, string> config, Excel.Application excel, File.ClassFile rating_config, Excel.Workbook excelWorkBook_rating)
@@ -67,10 +91,5 @@ class ClassWorkbook
         var ExcelWorkSheet_new_list = (Excel.Worksheet)excelWorkBook_rating.Worksheets.Add(System.Reflection.Missing.Value, excelWorkBook_rating.Worksheets[last_sheet]);
         ExcelWorkSheet_new_list.Name = config["date_current_report"].Substring(0, 5);
         ExcelWorkSheet_new_list.Range["A1"].Value = "Рейтинг подразделений по 4 показателям за " + config["date_current_report"];
-    }
-
-    public static void Rating_copy()
-    {
-
     }
 }
