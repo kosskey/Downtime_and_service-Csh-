@@ -22,17 +22,17 @@ class ClassWorkbook
         excelWorkSheet_rating.Range["B" + amount_line_next_start + ":B" + amount_line_next_end].Value = date_val;
     }
 
-    public static void Report_copy(Date.ClassDate date, Excel.Application excel, File.ClassFile sources_config, Excel.Workbook excelWorkBook_report, Excel.Workbook excelWorkBook_rating)
+    public static void Report_copy(Date.ClassDate date, Excel.Application excel, File.ClassFile report_config, Excel.Workbook excelWorkBook_report, Excel.Workbook excelWorkBook_rating)
     {
-        if (excel != null & sources_config != null & excelWorkBook_report != null & excelWorkBook_rating != null)
+        if (excel != null & report_config != null & excelWorkBook_report != null & excelWorkBook_rating != null)
         {
-            var sheet_rating = sources_config!.Activate_sheet(excelWorkBook_report!, "Рейтинг");
+            var sheet_rating = report_config!.Activate_sheet(excelWorkBook_report!, "Рейтинг");
                 sheet_rating.Activate();
                 sheet_rating.Range["R2"].Value = Convert.ToDateTime(date.d_full);
                 excel!.Run("Сортировка_рейтинга");
                 sheet_rating.Range["A22", "B34"].Copy();
 
-            var sort_rating = sources_config.Activate_sheet(excelWorkBook_rating!, date.d_briefly);
+            var sort_rating = report_config.Activate_sheet(excelWorkBook_rating!, date.d_briefly);
                 var paste = Excel.XlPasteType.xlPasteValues;
                 sort_rating.Range["A3"].PasteSpecial(paste);
                 var sort = Excel.XlSortOrder.xlAscending;
@@ -40,22 +40,30 @@ class ClassWorkbook
                 range2.Sort(range2.Columns[1], sort);
                 //range2.Sort(range2.Columns.Item[1], sort);
         }
+        else
+        {
+            Console.WriteLine("-- Ошибка копирования, файлы отчета не открыты");
+        }
     }
 
-    public static void Report_save(Excel.Application excel, File.ClassFile sources_config, Excel.Workbook excelWorkBook_report)
+    public static void Report_save(Excel.Application excel, File.ClassFile report_config, Excel.Workbook excelWorkBook_report)
     {
-        if (excel != null & sources_config != null & excelWorkBook_report != null)
+        if (excel != null & report_config != null & excelWorkBook_report != null)
         {
-            var excelWorkSheet = sources_config!.Activate_sheet(excelWorkBook_report!, "Источник Рейтинг");
+            var excelWorkSheet = report_config!.Activate_sheet(excelWorkBook_report!, "Источник Рейтинг");
                 excelWorkSheet.Activate();
                 excel!.Run("Выкладки");
                 excelWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;
 
-            var excelWorkSheet_active = sources_config.Activate_sheet(excelWorkBook_report!, "Рейтинг");
+            var excelWorkSheet_active = report_config.Activate_sheet(excelWorkBook_report!, "Рейтинг");
                 excelWorkSheet_active.Activate();
                 excel.DisplayAlerts = false;
 
-            excelWorkBook_report!.SaveAs(sources_config.save_link, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
+            excelWorkBook_report!.SaveAs(report_config.save_link, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
+        }
+        else
+        {
+            Console.WriteLine("-- Ошибка сохранения, файлы отчета не открыты");
         }
     }
 
@@ -106,6 +114,10 @@ class ClassWorkbook
                 worksheet.Range["A" + amount_line_old].Copy();
                 worksheet.Range["A" + (amount_line_old + 1), "A" + amount_line_new].PasteSpecial();
         }
+        else
+        {
+            //Console.WriteLine("-- Ошибка копирования, файлы не открыты");
+        }
     }
 
     public static void Rating_create(Date.ClassDate date, Excel.Application excel, File.ClassFile rating_config, Excel.Workbook excelWorkBook_rating)
@@ -116,11 +128,15 @@ class ClassWorkbook
         ExcelWorkSheet_new_list.Range["A1"].Value = "Рейтинг подразделений по 4 показателям за " + date.d_full;
     }
 
-    public static void Source_and_rating_save(Excel.Workbook excelWorkBook_source_and_rating)
+    public static void Source_and_rating_save(Excel.Workbook excelWorkBook_sources_and_rating)
     {
-        if (excelWorkBook_source_and_rating != null)
+        if (excelWorkBook_sources_and_rating != null)
         {
-            excelWorkBook_source_and_rating.Save();
+            excelWorkBook_sources_and_rating.Save();
+        }
+        else
+        {
+            //Console.WriteLine("-- Ошибка созранения, файлы не открыты");
         }
     }
 }
