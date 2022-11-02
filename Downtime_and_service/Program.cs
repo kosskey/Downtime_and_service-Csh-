@@ -5,6 +5,7 @@ class ClassProgram
     static void Main(string[] args)
     {
         var config = Config.ClassConfig.Get_Config();
+        var date = new Date.ClassDate(config["date_current_report"]);
 
         Excel.Application? excel = null;
 
@@ -44,59 +45,61 @@ class ClassProgram
             {
                 excel = File.ClassFile.Start_Excel();
                 
-                report_config = new File.ClassFile("report", config);
+                report_config = new File.ClassFile("report", config, date);
                 excelWorkBook_report = report_config.Open_file(excel);
-                ClassWorkbook.Report_create(config, excel, report_config, excelWorkBook_report);
+                ClassWorkbook.Report_create(date, excel, report_config, excelWorkBook_report);
 
-                operators_CA_config = new File.ClassFile("operators_CA", config);
+                operators_CA_config = new File.ClassFile("operators_CA", config, date);
                 excelWorkBook_operators_CA = operators_CA_config.Open_file(excel);
-                ClassWorkbook.Sources_create(config, operators_CA_config, excelWorkBook_operators_CA);
+                ClassWorkbook.Sources_create(date, operators_CA_config, excelWorkBook_operators_CA);
 
-                operators_CC_config = new File.ClassFile("operators_CC", config);
+                operators_CC_config = new File.ClassFile("operators_CC", config, date);
                 excelWorkBook_operators_CC = operators_CC_config.Open_file(excel);
-                ClassWorkbook.Sources_create(config, operators_CC_config, excelWorkBook_operators_CC);
+                ClassWorkbook.Sources_create(date, operators_CC_config, excelWorkBook_operators_CC);
 
-                technician_config = new File.ClassFile("technician", config);
+                technician_config = new File.ClassFile("technician", config, date);
                 excelWorkBook_technician = technician_config.Open_file(excel);
-                ClassWorkbook.Sources_create(config, technician_config, excelWorkBook_technician);
+                ClassWorkbook.Sources_create(date, technician_config, excelWorkBook_technician);
 
-                revenue_config = new File.ClassFile("revenue", config);
+                revenue_config = new File.ClassFile("revenue", config, date);
                 excelWorkBook_revenue = revenue_config.Open_file(excel);
-                ClassWorkbook.Sources_create(config, revenue_config, excelWorkBook_revenue);
+                ClassWorkbook.Sources_create(date, revenue_config, excelWorkBook_revenue);
 
-                amount_config = new File.ClassFile("amount", config);
+                amount_config = new File.ClassFile("amount", config, date);
                 excelWorkBook_amount = amount_config.Open_file(excel);
-                ClassWorkbook.Sources_create(config, amount_config, excelWorkBook_amount);
+                ClassWorkbook.Sources_create(date, amount_config, excelWorkBook_amount);
 
-                not_connection_config = new File.ClassFile("not_connection", config);
+                not_connection_config = new File.ClassFile("not_connection", config, date);
                 excelWorkBook_not_connection = not_connection_config.Open_file(excel);
-                ClassWorkbook.Sources_create(config, not_connection_config, excelWorkBook_not_connection);
+                ClassWorkbook.Sources_create(date, not_connection_config, excelWorkBook_not_connection);
 
-                not_work_config = new File.ClassFile("not_work", config);
+                not_work_config = new File.ClassFile("not_work", config, date);
                 excelWorkBook_not_work = not_work_config.Open_file(excel);
-                ClassWorkbook.Sources_create(config, not_work_config, excelWorkBook_not_work);
+                ClassWorkbook.Sources_create(date, not_work_config, excelWorkBook_not_work);
 
-                var rating_config = new File.ClassFile("rating", config);
+                var rating_config = new File.ClassFile("rating", config, date);
                 excelWorkBook_rating = rating_config.Open_file(excel);
-                ClassWorkbook.Rating_create(config, excel, rating_config, excelWorkBook_rating);
+                ClassWorkbook.Rating_create(date, excel, rating_config, excelWorkBook_rating);
+
+                Console.WriteLine("-- Файлы открыты");
             }
             else if(v == "2")
             {
-                ClassWorkbook.Sources_copy(config, operators_CA_config!, excelWorkBook_operators_CA!, excelWorkBook_report!, 3);
-                ClassWorkbook.Sources_copy(config, operators_CC_config!, excelWorkBook_operators_CC!, excelWorkBook_report!, 4);
-                ClassWorkbook.Sources_copy(config, technician_config!, excelWorkBook_technician!, excelWorkBook_report!, 5);
-                ClassWorkbook.Sources_copy(config, revenue_config!, excelWorkBook_revenue!, excelWorkBook_report!, 6);
-                ClassWorkbook.Sources_copy(config, amount_config!, excelWorkBook_amount!, excelWorkBook_report!, 7);
-                ClassWorkbook.Sources_copy(config, not_connection_config!, excelWorkBook_not_connection!, excelWorkBook_report!, 8);
-                ClassWorkbook.Sources_copy(config, not_work_config!, excelWorkBook_not_work!, excelWorkBook_report!, 9);
+                ClassWorkbook.Sources_copy(date, operators_CA_config!, excelWorkBook_operators_CA!, excelWorkBook_report!, 3);
+                ClassWorkbook.Sources_copy(date, operators_CC_config!, excelWorkBook_operators_CC!, excelWorkBook_report!, 4);
+                ClassWorkbook.Sources_copy(date, technician_config!, excelWorkBook_technician!, excelWorkBook_report!, 5);
+                ClassWorkbook.Sources_copy(date, revenue_config!, excelWorkBook_revenue!, excelWorkBook_report!, 6);
+                ClassWorkbook.Sources_copy(date, amount_config!, excelWorkBook_amount!, excelWorkBook_report!, 7);
+                ClassWorkbook.Sources_copy(date, not_connection_config!, excelWorkBook_not_connection!, excelWorkBook_report!, 8);
+                ClassWorkbook.Sources_copy(date, not_work_config!, excelWorkBook_not_work!, excelWorkBook_report!, 9);
 
-                ClassWorkbook.Report_copy(config, excel!, report_config!, excelWorkBook_report!, excelWorkBook_rating!);
+                ClassWorkbook.Report_copy(date, excel!, report_config!, excelWorkBook_report!, excelWorkBook_rating!);
 
                 Console.WriteLine("-- Информация скопирована");
             }
             else if(v == "3")
             {
-                ClassWorkbook.Report_save(config, excel!, report_config!, excelWorkBook_report!);
+                ClassWorkbook.Report_save(excel!, report_config!, excelWorkBook_report!);
                 File.ClassFile.Close_file(excelWorkBook_report!);
 
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_operators_CA!);
