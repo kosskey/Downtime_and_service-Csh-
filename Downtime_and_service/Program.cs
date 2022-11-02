@@ -149,7 +149,11 @@ class ClassProgram
                 //System.Diagnostics.Process ExcelProcess = new System.Diagnostics.Process();
 
                 var Ex = System.Diagnostics.Process.GetProcessesByName("EXCEL");
-                Ex[0].Kill();
+                if (Ex != null)
+                {
+                    Ex[0].Kill();
+                }
+                
                 break;
             }
         }
