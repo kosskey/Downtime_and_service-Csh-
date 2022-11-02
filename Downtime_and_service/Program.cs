@@ -95,7 +95,15 @@ class ClassProgram
 
                 ClassWorkbook.Report_copy(date, excel!, report_config!, excelWorkBook_report!, excelWorkBook_rating!);
 
-                Console.WriteLine("-- Информация скопирована");
+
+                if (excel != null & report_config != null & excelWorkBook_report != null & excelWorkBook_rating != null)
+                {
+                    Console.WriteLine("-- Информация скопирована");
+                }
+                else
+                {
+                    Console.WriteLine("-- Ошибка копирования, файлы отчета не открыты");
+                }
             }
             else if(v == "3")
             {
@@ -126,7 +134,15 @@ class ClassProgram
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_rating!);
                 File.ClassFile.Close_file(excelWorkBook_rating!);
 
-                Console.WriteLine("-- Файлы закрыты");
+
+                if (excel != null & report_config != null & excelWorkBook_report != null)
+                {
+                    Console.WriteLine("-- Файлы закрыты");
+                }
+                else
+                {
+                    Console.WriteLine("-- Ошибка сохранения, файлы отчета не открыты");
+                }
             }
             else if(v == "4")
             {

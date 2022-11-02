@@ -40,10 +40,6 @@ class ClassWorkbook
                 range2.Sort(range2.Columns[1], sort);
                 //range2.Sort(range2.Columns.Item[1], sort);
         }
-        else
-        {
-            Console.WriteLine("-- Ошибка копирования, файлы отчета не открыты");
-        }
     }
 
     public static void Report_save(Excel.Application excel, File.ClassFile report_config, Excel.Workbook excelWorkBook_report)
@@ -60,10 +56,6 @@ class ClassWorkbook
                 excel.DisplayAlerts = false;
 
             excelWorkBook_report!.SaveAs(report_config.save_link, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
-        }
-        else
-        {
-            Console.WriteLine("-- Ошибка сохранения, файлы отчета не открыты");
         }
     }
 
@@ -114,10 +106,6 @@ class ClassWorkbook
                 worksheet.Range["A" + amount_line_old].Copy();
                 worksheet.Range["A" + (amount_line_old + 1), "A" + amount_line_new].PasteSpecial();
         }
-        else
-        {
-            //Console.WriteLine("-- Ошибка копирования, файлы не открыты");
-        }
     }
 
     public static void Rating_create(Date.ClassDate date, Excel.Application excel, File.ClassFile rating_config, Excel.Workbook excelWorkBook_rating)
@@ -133,10 +121,6 @@ class ClassWorkbook
         if (excelWorkBook_sources_and_rating != null)
         {
             excelWorkBook_sources_and_rating.Save();
-        }
-        else
-        {
-            //Console.WriteLine("-- Ошибка созранения, файлы не открыты");
         }
     }
 }
