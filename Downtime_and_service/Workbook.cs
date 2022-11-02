@@ -24,33 +24,39 @@ class ClassWorkbook
 
     public static void Report_copy(Date.ClassDate date, Excel.Application excel, File.ClassFile sources_config, Excel.Workbook excelWorkBook_report, Excel.Workbook excelWorkBook_rating)
     {
-        var sheet_rating = sources_config.Activate_sheet(excelWorkBook_report, "Рейтинг");
-            sheet_rating.Activate();
-            sheet_rating.Range["R2"].Value = Convert.ToDateTime(date.d_full);
-            excel.Run("Сортировка_рейтинга");
-            sheet_rating.Range["A22", "B34"].Copy();
+        if (excel != null & sources_config != null & excelWorkBook_report != null & excelWorkBook_rating != null)
+        {
+            var sheet_rating = sources_config!.Activate_sheet(excelWorkBook_report!, "Рейтинг");
+                sheet_rating.Activate();
+                sheet_rating.Range["R2"].Value = Convert.ToDateTime(date.d_full);
+                excel!.Run("Сортировка_рейтинга");
+                sheet_rating.Range["A22", "B34"].Copy();
 
-        var sort_rating = sources_config.Activate_sheet(excelWorkBook_rating, date.d_briefly);
-            var paste = Excel.XlPasteType.xlPasteValues;
-            sort_rating.Range["A3"].PasteSpecial(paste);
-            var sort = Excel.XlSortOrder.xlAscending;
-            dynamic range2 = sort_rating.Range["A3", "B15"];
-            range2.Sort(range2.Columns[1], sort);
-            //range2.Sort(range2.Columns.Item[1], sort);
+            var sort_rating = sources_config.Activate_sheet(excelWorkBook_rating!, date.d_briefly);
+                var paste = Excel.XlPasteType.xlPasteValues;
+                sort_rating.Range["A3"].PasteSpecial(paste);
+                var sort = Excel.XlSortOrder.xlAscending;
+                dynamic range2 = sort_rating.Range["A3", "B15"];
+                range2.Sort(range2.Columns[1], sort);
+                //range2.Sort(range2.Columns.Item[1], sort);
+        }
     }
 
     public static void Report_save(Excel.Application excel, File.ClassFile sources_config, Excel.Workbook excelWorkBook_report)
     {
-        var excelWorkSheet = sources_config.Activate_sheet(excelWorkBook_report, "Источник Рейтинг");
-            excelWorkSheet.Activate();
-            excel.Run("Выкладки");
-            excelWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;
+        if (excel != null & sources_config != null & excelWorkBook_report != null)
+        {
+            var excelWorkSheet = sources_config!.Activate_sheet(excelWorkBook_report!, "Источник Рейтинг");
+                excelWorkSheet.Activate();
+                excel!.Run("Выкладки");
+                excelWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;
 
-        var excelWorkSheet_active = sources_config.Activate_sheet(excelWorkBook_report, "Рейтинг");
-            excelWorkSheet_active.Activate();
-            excel.DisplayAlerts = false;
+            var excelWorkSheet_active = sources_config.Activate_sheet(excelWorkBook_report!, "Рейтинг");
+                excelWorkSheet_active.Activate();
+                excel.DisplayAlerts = false;
 
-        excelWorkBook_report.SaveAs(sources_config.save_link, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
+            excelWorkBook_report!.SaveAs(sources_config.save_link, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
+        }
     }
 
     public static void Sources_create(Date.ClassDate date, File.ClassFile sources_config, Excel.Workbook excelWorkBook_sources)
@@ -82,21 +88,24 @@ class ClassWorkbook
 
     public static void Sources_copy(Date.ClassDate date, File.ClassFile sources_config, Excel.Workbook excelWorkBook_sources, Excel.Workbook excelWorkBook_report, int row)
     {
-        var value1 = sources_config.Activate_sheet(excelWorkBook_sources, "Установочные");
-            string range = (string)value1.Range["B2"].Text;
-            value1.Range[range].Copy();
-        
-        var sheet_installation = sources_config.Activate_sheet(excelWorkBook_report, "Установочные");
-            var q = sources_config.Activate_range(sheet_installation, row, 2);
-            int amount_line_old = Convert.ToInt32(q.Text);
-            var worksheet = sources_config.Activate_sheet(excelWorkBook_report, sources_config.name_rus);
-            worksheet.Range["C" + (amount_line_old + 1)].PasteSpecial(Excel.XlPasteType.xlPasteValues);
+        if (sources_config != null & excelWorkBook_sources != null & excelWorkBook_report != null)
+        {
+            var value1 = sources_config!.Activate_sheet(excelWorkBook_sources!, "Установочные");
+                string range = (string)value1.Range["B2"].Text;
+                value1.Range[range].Copy();
+            
+            var sheet_installation = sources_config.Activate_sheet(excelWorkBook_report!, "Установочные");
+                var q = sources_config.Activate_range(sheet_installation, row, 2);
+                int amount_line_old = Convert.ToInt32(q.Text);
+                var worksheet = sources_config.Activate_sheet(excelWorkBook_report, sources_config.name_rus);
+                worksheet.Range["C" + (amount_line_old + 1)].PasteSpecial(Excel.XlPasteType.xlPasteValues);
 
-            var q2 = sources_config.Activate_range(sheet_installation, row, 2);
-            int amount_line_new = Convert.ToInt32(q2.Text);
-            worksheet.Range["B" + (amount_line_old + 1), "B" + amount_line_new].Value = Convert.ToDateTime(date.d_full);
-            worksheet.Range["A" + amount_line_old].Copy();
-            worksheet.Range["A" + (amount_line_old + 1), "A" + amount_line_new].PasteSpecial();
+                var q2 = sources_config.Activate_range(sheet_installation, row, 2);
+                int amount_line_new = Convert.ToInt32(q2.Text);
+                worksheet.Range["B" + (amount_line_old + 1), "B" + amount_line_new].Value = Convert.ToDateTime(date.d_full);
+                worksheet.Range["A" + amount_line_old].Copy();
+                worksheet.Range["A" + (amount_line_old + 1), "A" + amount_line_new].PasteSpecial();
+        }
     }
 
     public static void Rating_create(Date.ClassDate date, Excel.Application excel, File.ClassFile rating_config, Excel.Workbook excelWorkBook_rating)
@@ -109,6 +118,9 @@ class ClassWorkbook
 
     public static void Source_and_rating_save(Excel.Workbook excelWorkBook_source_and_rating)
     {
-        excelWorkBook_source_and_rating.Save();
+        if (excelWorkBook_source_and_rating != null)
+        {
+            excelWorkBook_source_and_rating.Save();
+        }
     }
 }
