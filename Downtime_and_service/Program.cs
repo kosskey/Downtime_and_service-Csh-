@@ -44,7 +44,8 @@ class ClassProgram
             if (v == "1")
             {
                 Database.ClassDatabase.Open();
-                
+                Database.ClassDatabase.Insert();
+
                 excel = File.ClassFile.Start_Excel();
                 
                 report_config = new File.ClassFile("report", config, date);
