@@ -4,7 +4,7 @@ public class ClassDatabase
 {
     public static void Open()
     {
-        using (var connection = new SqliteConnection("Data Source=D:\\IT\\Development\\GitHub\\kosskey\\database2.db"))
+        using (var connection = new SqliteConnection("Data Source=D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\database2.db"))
         {
             connection.Open();
 
@@ -35,7 +35,7 @@ public class ClassDatabase
     
     public static void Insert()
     {
-        using (var connection = new SqliteConnection("Data Source=D:\\IT\\Development\\GitHub\\kosskey\\database2.db"))
+        using (var connection = new SqliteConnection("Data Source=D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\database2.db"))
         {
             connection.Open();
             

@@ -34,17 +34,20 @@ class ClassProgram
         while (true) {
             Console.WriteLine("=====================================================================");
             Console.WriteLine("Выберите функцию:");
-            Console.WriteLine("1. Запустить Excel, открыть все файлы отчетов, создать новые выкладки");
-            Console.WriteLine("2. Копировать сведения");
-            Console.WriteLine("3. Сохранить и закрыть все файлы отчетов");
-            Console.WriteLine("4. Зактрыть Excel, завершить скрипт");
+            Console.WriteLine("1. Запустить Excel, конвертировать из исходников XLSX в CSV");
+            Console.WriteLine("2. Открыть файл отчета, создать новые выкладки");
+            Console.WriteLine("3. Копировать сведения из CSV в базу Базу данных");
+            Console.WriteLine("4. Копировать сведения из Базы данных в файл отчета");
+            Console.WriteLine("5. Копировать рейтинг из файла отчета в Базу данных и в файл рейтинга в TXT");
+            Console.WriteLine("6. Сохранить и закрыть файл отчета");
+            Console.WriteLine("7. Зактрыть Excel, удалить файлы CSV, завершить скрипт");
 
             string? v = Console.ReadLine();
 
             if (v == "1")
             {
-                Database.ClassDatabase.Open();
-                Database.ClassDatabase.Insert();
+                //Database.ClassDatabase.Open();
+                //Database.ClassDatabase.Insert();
 
                 excel = File.ClassFile.Start_Excel();
                 
