@@ -4,6 +4,7 @@
     <ProjectReference Include="..\Date\Date.csproj" />
     <ProjectReference Include="..\File\File.csproj" />
     <ProjectReference Include="..\Config\Config.csproj" />
+    <ProjectReference Include="..\Database\Database.csproj" />
 
     <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1001" />
     <PackageReference Include="MicrosoftOfficeCore" Version="15.0.0" />

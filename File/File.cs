@@ -11,10 +11,8 @@ public class ClassFile
     private readonly string full_link;
     public readonly string save_link;
 
-    public ClassFile(string name_eng, Dictionary<string, string> config)
+    public ClassFile(string name_eng, Dictionary<string, string> config, Date.ClassDate date)
     {
-        var date = new Date.ClassDate(config["date_current_report"]);
-
         this.name_eng = "ExcelWorkBook_" + name_eng;
         name_rus = config[this.name_eng];
 
