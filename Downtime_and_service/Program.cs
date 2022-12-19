@@ -46,7 +46,7 @@ class ClassProgram
 
             if (v == "1")
             {
-                //Database.ClassDatabase.Open();
+                Database.ClassDatabase.Open();
                 //Database.ClassDatabase.Insert();
 
                 excel = File.ClassFile.Start_Excel();
