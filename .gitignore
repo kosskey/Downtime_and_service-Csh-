@@ -368,6 +368,5 @@ FodyWeavers.xsd
 #JetBrains Fleet
 .fleet/
 
-*bin
-/Downtime_and_service/obj/
-/Downtime_and_service/bin/Properties/
+/Downtime_and_service/obj*
+/Downtime_and_service/bin*
