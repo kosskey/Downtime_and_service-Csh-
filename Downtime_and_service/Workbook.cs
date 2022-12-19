@@ -97,7 +97,7 @@ class ClassWorkbook
             var sheet_installation = sources_config.Activate_sheet(excelWorkBook_report!, "Установочные");
                 var q = sources_config.Activate_range(sheet_installation, row, 2);
                 int amount_line_old = Convert.ToInt32(q.Text);
-                var worksheet = sources_config.Activate_sheet(excelWorkBook_report, sources_config.name_rus);
+                var worksheet = sources_config.Activate_sheet(excelWorkBook_report!, sources_config.name_rus);
                 worksheet.Range["C" + (amount_line_old + 1)].PasteSpecial(Excel.XlPasteType.xlPasteValues);
 
                 var q2 = sources_config.Activate_range(sheet_installation, row, 2);
