@@ -1,63 +1,166 @@
-﻿global using Excel = Microsoft.Office.Interop.Excel;
+﻿namespace Downtime_and_service;
 
-namespace Downtime_and_service
+class ClassProgram
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            var ExcelObj = new Excel.Application();
-            ExcelObj.Visible = true;
-            ExcelObj.WindowState = Excel.XlWindowState.xlMaximized;
+        var config = Config.ClassConfig.Get_Config();
+        var date = new Date.ClassDate(config["date_current_report"]);
 
-            Console.WriteLine("Введите дату отчета в формате ГГГГ.ММ.ДД");
-            string? d_reverse = Console.ReadLine();
-            
-            var date = new Dictionary<string, string>()
+        Excel.Application? excel = null;
+
+        Excel.Workbook? excelWorkBook_report = null;
+        Excel.Workbook? excelWorkBook_operators_CA = null;
+        Excel.Workbook? excelWorkBook_operators_CC = null;
+        Excel.Workbook? excelWorkBook_technician = null;
+        Excel.Workbook? excelWorkBook_revenue = null;
+        Excel.Workbook? excelWorkBook_amount = null;
+        Excel.Workbook? excelWorkBook_not_connection = null;
+        Excel.Workbook? excelWorkBook_not_work = null;
+        Excel.Workbook? excelWorkBook_rating = null;
+
+        File.ClassFile? report_config = null;
+        File.ClassFile? operators_CA_config = null;
+        File.ClassFile? operators_CC_config = null;
+        File.ClassFile? technician_config = null;
+        File.ClassFile? revenue_config = null;
+        File.ClassFile? amount_config = null;
+        File.ClassFile? not_connection_config = null;
+        File.ClassFile? not_work_config = null;
+
+        Console.WriteLine("Дата текущего отчета: " + config["date_current_report"]);
+        Console.WriteLine("Дата предыдущего отчета: " + config["date_previous_report"]);
+
+        while (true) {
+            Console.WriteLine("=====================================================================");
+            Console.WriteLine("Выберите функцию:");
+            Console.WriteLine("1. Запустить Excel, конвертировать из исходников XLSX в CSV");
+            Console.WriteLine("2. Открыть файл отчета, создать новые выкладки");
+            Console.WriteLine("3. Копировать сведения из CSV в базу Базу данных");
+            Console.WriteLine("4. Копировать сведения из Базы данных в файл отчета");
+            Console.WriteLine("5. Копировать рейтинг из файла отчета в Базу данных и в файл рейтинга в TXT");
+            Console.WriteLine("6. Сохранить и закрыть файл отчета");
+            Console.WriteLine("7. Зактрыть Excel, удалить файлы CSV, завершить скрипт");
+
+            string? v = Console.ReadLine();
+
+            if (v == "1")
             {
-                ["day"] = d_reverse!.Substring(8, 2),
-                ["month"] = d_reverse.Substring(5, 2),
-                ["year"] = d_reverse.Substring(0, 4)
-            };
+                //Database.ClassDatabase.Open();
+                //Database.ClassDatabase.Insert();
 
-            string d_full = date["day"] + "." + date["month"] + "." + date["year"];
-            string d_briefly = $"{date["day"]}.{date["month"]}";
+                excel = File.ClassFile.Start_Excel();
+                
+                report_config = new File.ClassFile("report", config, date);
+                excelWorkBook_report = report_config.Open_file(excel);
+                ClassWorkbook.Report_create(date, excel, report_config, excelWorkBook_report);
 
-            Excel.Workbook? ExcelWorkBook_report = null;
-            var ExcelWorkBook_sources = new Dictionary<string, Excel.Workbook>();
-            Excel.Workbook? ExcelWorkBook_rating = null;
+                operators_CA_config = new File.ClassFile("operators_CA", config, date);
+                excelWorkBook_operators_CA = operators_CA_config.Open_file(excel);
+                ClassWorkbook.Sources_create(date, operators_CA_config, excelWorkBook_operators_CA);
 
-            while (true) {
-                Console.WriteLine("Выберите функцию:");
-                Console.WriteLine("1. Открыть файлы отчета");
-                Console.WriteLine("2. Копировать сведения");
-                Console.WriteLine("3. Сохраниить и закрыть все файлы");
-                Console.WriteLine("4. Завершить скрипт");
+                operators_CC_config = new File.ClassFile("operators_CC", config, date);
+                excelWorkBook_operators_CC = operators_CC_config.Open_file(excel);
+                ClassWorkbook.Sources_create(date, operators_CC_config, excelWorkBook_operators_CC);
 
-                string? v = Console.ReadLine();
+                technician_config = new File.ClassFile("technician", config, date);
+                excelWorkBook_technician = technician_config.Open_file(excel);
+                ClassWorkbook.Sources_create(date, technician_config, excelWorkBook_technician);
 
-                if (v == "1")
+                revenue_config = new File.ClassFile("revenue", config, date);
+                excelWorkBook_revenue = revenue_config.Open_file(excel);
+                ClassWorkbook.Sources_create(date, revenue_config, excelWorkBook_revenue);
+
+                amount_config = new File.ClassFile("amount", config, date);
+                excelWorkBook_amount = amount_config.Open_file(excel);
+                ClassWorkbook.Sources_create(date, amount_config, excelWorkBook_amount);
+
+                not_connection_config = new File.ClassFile("not_connection", config, date);
+                excelWorkBook_not_connection = not_connection_config.Open_file(excel);
+                ClassWorkbook.Sources_create(date, not_connection_config, excelWorkBook_not_connection);
+
+                not_work_config = new File.ClassFile("not_work", config, date);
+                excelWorkBook_not_work = not_work_config.Open_file(excel);
+                ClassWorkbook.Sources_create(date, not_work_config, excelWorkBook_not_work);
+
+                var rating_config = new File.ClassFile("rating", config, date);
+                excelWorkBook_rating = rating_config.Open_file(excel);
+                ClassWorkbook.Rating_create(date, excel, rating_config, excelWorkBook_rating);
+
+                Console.WriteLine("-- Файлы открыты");
+            }
+            else if(v == "2")
+            {
+                ClassWorkbook.Sources_copy(date, operators_CA_config!, excelWorkBook_operators_CA!, excelWorkBook_report!, 3);
+                ClassWorkbook.Sources_copy(date, operators_CC_config!, excelWorkBook_operators_CC!, excelWorkBook_report!, 4);
+                ClassWorkbook.Sources_copy(date, technician_config!, excelWorkBook_technician!, excelWorkBook_report!, 5);
+                ClassWorkbook.Sources_copy(date, revenue_config!, excelWorkBook_revenue!, excelWorkBook_report!, 6);
+                ClassWorkbook.Sources_copy(date, amount_config!, excelWorkBook_amount!, excelWorkBook_report!, 7);
+                ClassWorkbook.Sources_copy(date, not_connection_config!, excelWorkBook_not_connection!, excelWorkBook_report!, 8);
+                ClassWorkbook.Sources_copy(date, not_work_config!, excelWorkBook_not_work!, excelWorkBook_report!, 9);
+
+                ClassWorkbook.Report_copy(date, excel!, report_config!, excelWorkBook_report!, excelWorkBook_rating!);
+
+
+                if (excel != null & report_config != null & excelWorkBook_report != null & excelWorkBook_rating != null)
                 {
-                    ExcelWorkBook_report = FileAction.FuncOpen1(ExcelObj, date);
-                    FileAction.FuncOpen2(ExcelObj, date, d_briefly, ExcelWorkBook_sources);
-                    ExcelWorkBook_rating = FileAction.FuncOpen3(ExcelObj, date, d_briefly, d_full);
+                    Console.WriteLine("-- Информация скопирована");
                 }
-                else if(v == "2")
+                else
                 {
-                    FileAction.FuncCopy(ExcelObj, date, d_briefly, ExcelWorkBook_report!, ExcelWorkBook_sources, ExcelWorkBook_rating!);
+                    Console.WriteLine("-- Ошибка копирования, файлы отчета не открыты");
                 }
-                else if(v == "3")
-                {
-                    FileAction.FuncClose(ExcelObj, date, d_full, ExcelWorkBook_report!, ExcelWorkBook_sources, ExcelWorkBook_rating!);
-                }
-                else if(v == "4")
-                {
-                    //System.Diagnostics.Process ExcelProcess = new System.Diagnostics.Process();
+            }
+            else if(v == "3")
+            {
+                ClassWorkbook.Report_save(excel!, report_config!, excelWorkBook_report!);
+                File.ClassFile.Close_file(excelWorkBook_report!);
 
-                    var Ex = System.Diagnostics.Process.GetProcessesByName("EXCEL");
+                ClassWorkbook.Source_and_rating_save(excelWorkBook_operators_CA!);
+                File.ClassFile.Close_file(excelWorkBook_operators_CA!);
+
+                ClassWorkbook.Source_and_rating_save(excelWorkBook_operators_CC!);
+                File.ClassFile.Close_file(excelWorkBook_operators_CC!);
+
+                ClassWorkbook.Source_and_rating_save(excelWorkBook_technician!);
+                File.ClassFile.Close_file(excelWorkBook_technician!);
+
+                ClassWorkbook.Source_and_rating_save(excelWorkBook_revenue!);
+                File.ClassFile.Close_file(excelWorkBook_revenue!);
+
+                ClassWorkbook.Source_and_rating_save(excelWorkBook_amount!);
+                File.ClassFile.Close_file(excelWorkBook_amount!);
+
+                ClassWorkbook.Source_and_rating_save(excelWorkBook_not_connection!);
+                File.ClassFile.Close_file(excelWorkBook_not_connection!);
+
+                ClassWorkbook.Source_and_rating_save(excelWorkBook_not_work!);
+                File.ClassFile.Close_file(excelWorkBook_not_work!);
+
+                ClassWorkbook.Source_and_rating_save(excelWorkBook_rating!);
+                File.ClassFile.Close_file(excelWorkBook_rating!);
+
+
+                if (excel != null & report_config != null & excelWorkBook_report != null)
+                {
+                    Console.WriteLine("-- Файлы закрыты");
+                }
+                else
+                {
+                    Console.WriteLine("-- Ошибка сохранения, файлы отчета не открыты");
+                }
+            }
+            else if(v == "4")
+            {
+                //System.Diagnostics.Process ExcelProcess = new System.Diagnostics.Process();
+
+                var Ex = System.Diagnostics.Process.GetProcessesByName("EXCEL");
+                if (Ex.Count() != 0)
+                {
                     Ex[0].Kill();
-                    break;
                 }
+                
+                break;
             }
         }
     }
