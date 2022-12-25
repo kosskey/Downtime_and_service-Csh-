@@ -2,7 +2,7 @@ namespace Downtime_and_service;
 
 class ClassWorkbook
 {
-    public static void Report_create(Date.ClassDate date, Excel.Application excel, File.ClassFile report_config, Excel.Workbook excelWorkBook_report)
+    public static void Report_create(Date.ClassDate date, Excel.Application excel, TypeFile.FileXLSX report_config, Excel.Workbook excelWorkBook_report)
     {
         var excelWorkSheet_rating = report_config.Activate_sheet(excelWorkBook_report, "Источник Рейтинг");
         excelWorkSheet_rating.Visible = Excel.XlSheetVisibility.xlSheetVisible;
@@ -22,7 +22,7 @@ class ClassWorkbook
         excelWorkSheet_rating.Range["B" + amount_line_next_start + ":B" + amount_line_next_end].Value = date_val;
     }
 
-    public static void Report_copy(Date.ClassDate date, Excel.Application excel, File.ClassFile report_config, Excel.Workbook excelWorkBook_report, Excel.Workbook excelWorkBook_rating)
+    public static void Report_copy(Date.ClassDate date, Excel.Application excel, TypeFile.FileXLSX report_config, Excel.Workbook excelWorkBook_report, Excel.Workbook excelWorkBook_rating)
     {
         if (excel != null & report_config != null & excelWorkBook_report != null & excelWorkBook_rating != null)
         {
@@ -42,7 +42,7 @@ class ClassWorkbook
         }
     }
 
-    public static void Report_save(Excel.Application excel, File.ClassFile report_config, Excel.Workbook excelWorkBook_report)
+    public static void Report_save(Excel.Application excel, TypeFile.FileXLSX report_config, Excel.Workbook excelWorkBook_report)
     {
         if (excel != null & report_config != null & excelWorkBook_report != null)
         {
@@ -59,7 +59,7 @@ class ClassWorkbook
         }
     }
 
-    public static void Sources_create(Date.ClassDate date, File.ClassFile sources_config, Excel.Workbook excelWorkBook_sources)
+    public static void Sources_create(Date.ClassDate date, TypeFile.FileXLSX sources_config, Excel.Workbook excelWorkBook_sources)
     {
         int last_sheet = excelWorkBook_sources.Worksheets.Count;
 
@@ -86,7 +86,7 @@ class ClassWorkbook
         ExcelWorkSheet_install.Range["B1"].Value = date.d_briefly;
     }
 
-    public static void Sources_copy(Date.ClassDate date, File.ClassFile sources_config, Excel.Workbook excelWorkBook_sources, Excel.Workbook excelWorkBook_report, int row)
+    public static void Sources_copy(Date.ClassDate date, TypeFile.FileXLSX sources_config, Excel.Workbook excelWorkBook_sources, Excel.Workbook excelWorkBook_report, int row)
     {
         if (sources_config != null & excelWorkBook_sources != null & excelWorkBook_report != null)
         {
@@ -108,7 +108,7 @@ class ClassWorkbook
         }
     }
 
-    public static void Rating_create(Date.ClassDate date, Excel.Application excel, File.ClassFile rating_config, Excel.Workbook excelWorkBook_rating)
+    public static void Rating_create(Date.ClassDate date, Excel.Application excel, TypeFile.FileXLSX rating_config, Excel.Workbook excelWorkBook_rating)
     {
         int last_sheet = excelWorkBook_rating.Worksheets.Count;
         var ExcelWorkSheet_new_list = (Excel.Worksheet)excelWorkBook_rating.Worksheets.Add(System.Reflection.Missing.Value, excelWorkBook_rating.Worksheets[last_sheet]);

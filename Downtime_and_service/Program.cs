@@ -19,14 +19,14 @@ class ClassProgram
         Excel.Workbook? excelWorkBook_not_work = null;
         Excel.Workbook? excelWorkBook_rating = null;
 
-        File.ClassFile? report_config = null;
-        File.ClassFile? operators_CA_config = null;
-        File.ClassFile? operators_CC_config = null;
-        File.ClassFile? technician_config = null;
-        File.ClassFile? revenue_config = null;
-        File.ClassFile? amount_config = null;
-        File.ClassFile? not_connection_config = null;
-        File.ClassFile? not_work_config = null;
+        TypeFile.FileXLSX? report_config = null;
+        TypeFile.FileXLSX? operators_CA_config = null;
+        TypeFile.FileXLSX? operators_CC_config = null;
+        TypeFile.FileXLSX? technician_config = null;
+        TypeFile.FileXLSX? revenue_config = null;
+        TypeFile.FileXLSX? amount_config = null;
+        TypeFile.FileXLSX? not_connection_config = null;
+        TypeFile.FileXLSX? not_work_config = null;
 
         Console.WriteLine("Дата текущего отчета: " + config["date_current_report"]);
         Console.WriteLine("Дата предыдущего отчета: " + config["date_previous_report"]);
@@ -46,48 +46,21 @@ class ClassProgram
 
             if (v == "1")
             {
-                Database.ClassDatabase.Open();
+                //Database.ClassDatabase.Open();
                 //Database.ClassDatabase.Insert();
 
-                excel = File.ClassFile.Start_Excel();
-                
-                report_config = new File.ClassFile("report", config, date);
-                excelWorkBook_report = report_config.Open_file(excel);
-                ClassWorkbook.Report_create(date, excel, report_config, excelWorkBook_report);
+                TypeFile.FileCSV.Open_CSV("operators_CA", config);
+                TypeFile.FileCSV.Open_CSV("operators_CC", config);
+                TypeFile.FileCSV.Open_CSV("technician", config);
 
-                operators_CA_config = new File.ClassFile("operators_CA", config, date);
+                excel = TypeFile.FileXLSX.Start_Excel();
+
+                operators_CA_config = new TypeFile.FileXLSX("operators_CA", config, date);
                 excelWorkBook_operators_CA = operators_CA_config.Open_file(excel);
-                ClassWorkbook.Sources_create(date, operators_CA_config, excelWorkBook_operators_CA);
+                var save_format = Excel.XlFileFormat.xlCSV;
+                excelWorkBook_operators_CA.SaveAs("q1", save_format);
+                
 
-                operators_CC_config = new File.ClassFile("operators_CC", config, date);
-                excelWorkBook_operators_CC = operators_CC_config.Open_file(excel);
-                ClassWorkbook.Sources_create(date, operators_CC_config, excelWorkBook_operators_CC);
-
-                technician_config = new File.ClassFile("technician", config, date);
-                excelWorkBook_technician = technician_config.Open_file(excel);
-                ClassWorkbook.Sources_create(date, technician_config, excelWorkBook_technician);
-
-                revenue_config = new File.ClassFile("revenue", config, date);
-                excelWorkBook_revenue = revenue_config.Open_file(excel);
-                ClassWorkbook.Sources_create(date, revenue_config, excelWorkBook_revenue);
-
-                amount_config = new File.ClassFile("amount", config, date);
-                excelWorkBook_amount = amount_config.Open_file(excel);
-                ClassWorkbook.Sources_create(date, amount_config, excelWorkBook_amount);
-
-                not_connection_config = new File.ClassFile("not_connection", config, date);
-                excelWorkBook_not_connection = not_connection_config.Open_file(excel);
-                ClassWorkbook.Sources_create(date, not_connection_config, excelWorkBook_not_connection);
-
-                not_work_config = new File.ClassFile("not_work", config, date);
-                excelWorkBook_not_work = not_work_config.Open_file(excel);
-                ClassWorkbook.Sources_create(date, not_work_config, excelWorkBook_not_work);
-
-                var rating_config = new File.ClassFile("rating", config, date);
-                excelWorkBook_rating = rating_config.Open_file(excel);
-                ClassWorkbook.Rating_create(date, excel, rating_config, excelWorkBook_rating);
-
-                Console.WriteLine("-- Файлы открыты");
             }
             else if(v == "2")
             {
@@ -114,31 +87,31 @@ class ClassProgram
             else if(v == "3")
             {
                 ClassWorkbook.Report_save(excel!, report_config!, excelWorkBook_report!);
-                File.ClassFile.Close_file(excelWorkBook_report!);
+                TypeFile.FileXLSX.Close_file(excelWorkBook_report!);
 
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_operators_CA!);
-                File.ClassFile.Close_file(excelWorkBook_operators_CA!);
+                TypeFile.FileXLSX.Close_file(excelWorkBook_operators_CA!);
 
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_operators_CC!);
-                File.ClassFile.Close_file(excelWorkBook_operators_CC!);
+                TypeFile.FileXLSX.Close_file(excelWorkBook_operators_CC!);
 
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_technician!);
-                File.ClassFile.Close_file(excelWorkBook_technician!);
+                TypeFile.FileXLSX.Close_file(excelWorkBook_technician!);
 
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_revenue!);
-                File.ClassFile.Close_file(excelWorkBook_revenue!);
+                TypeFile.FileXLSX.Close_file(excelWorkBook_revenue!);
 
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_amount!);
-                File.ClassFile.Close_file(excelWorkBook_amount!);
+                TypeFile.FileXLSX.Close_file(excelWorkBook_amount!);
 
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_not_connection!);
-                File.ClassFile.Close_file(excelWorkBook_not_connection!);
+                TypeFile.FileXLSX.Close_file(excelWorkBook_not_connection!);
 
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_not_work!);
-                File.ClassFile.Close_file(excelWorkBook_not_work!);
+                TypeFile.FileXLSX.Close_file(excelWorkBook_not_work!);
 
                 ClassWorkbook.Source_and_rating_save(excelWorkBook_rating!);
-                File.ClassFile.Close_file(excelWorkBook_rating!);
+                TypeFile.FileXLSX.Close_file(excelWorkBook_rating!);
 
 
                 if (excel != null & report_config != null & excelWorkBook_report != null)
@@ -161,6 +134,59 @@ class ClassProgram
                 }
                 
                 break;
+            }
+            else if (v == "5")
+            {
+
+            }
+            else if (v == "6")
+            {
+
+            }
+            else if (v == "7")
+            {
+
+
+                report_config = new TypeFile.FileXLSX("report", config, date);
+                excelWorkBook_report = report_config.Open_file(excel!);
+                ClassWorkbook.Report_create(date, excel!, report_config, excelWorkBook_report);
+
+                operators_CA_config = new TypeFile.FileXLSX("operators_CA", config, date);
+                excelWorkBook_operators_CA = operators_CA_config.Open_file(excel!);
+                ClassWorkbook.Sources_create(date, operators_CA_config, excelWorkBook_operators_CA);
+
+                operators_CC_config = new TypeFile.FileXLSX("operators_CC", config, date);
+                excelWorkBook_operators_CC = operators_CC_config.Open_file(excel!);
+                ClassWorkbook.Sources_create(date, operators_CC_config, excelWorkBook_operators_CC);
+
+                technician_config = new TypeFile.FileXLSX("technician", config, date);
+                excelWorkBook_technician = technician_config.Open_file(excel!);
+                ClassWorkbook.Sources_create(date, technician_config, excelWorkBook_technician);
+
+                revenue_config = new TypeFile.FileXLSX("revenue", config, date);
+                excelWorkBook_revenue = revenue_config.Open_file(excel!);
+                ClassWorkbook.Sources_create(date, revenue_config, excelWorkBook_revenue);
+
+                amount_config = new TypeFile.FileXLSX("amount", config, date);
+                excelWorkBook_amount = amount_config.Open_file(excel!);
+                ClassWorkbook.Sources_create(date, amount_config, excelWorkBook_amount);
+
+                not_connection_config = new TypeFile.FileXLSX("not_connection", config, date);
+                excelWorkBook_not_connection = not_connection_config.Open_file(excel!);
+                ClassWorkbook.Sources_create(date, not_connection_config, excelWorkBook_not_connection);
+
+                not_work_config = new TypeFile.FileXLSX("not_work", config, date);
+                excelWorkBook_not_work = not_work_config.Open_file(excel!);
+                ClassWorkbook.Sources_create(date, not_work_config, excelWorkBook_not_work);
+
+                var rating_config = new TypeFile.FileXLSX("rating", config, date);
+                excelWorkBook_rating = rating_config.Open_file(excel!);
+                ClassWorkbook.Rating_create(date, excel!, rating_config, excelWorkBook_rating);
+
+                Console.WriteLine("-- Файлы открыты");
+
+
+
             }
         }
     }

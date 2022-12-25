@@ -1,6 +1,6 @@
-﻿namespace File;
+﻿namespace TypeFile;
 
-public class ClassFile
+public class FileXLSX
 {
     //private readonly Excel.Application ExcelObj = Start_Excel();
     //private readonly Excel.Application ExcelObj;
@@ -11,7 +11,7 @@ public class ClassFile
     private readonly string full_link;
     public readonly string save_link;
 
-    public ClassFile(string name_eng, Dictionary<string, string> config, Date.ClassDate date)
+    public FileXLSX(string name_eng, Dictionary<string, string> config, Date.ClassDate date)
     {
         this.name_eng = "ExcelWorkBook_" + name_eng;
         name_rus = config[this.name_eng];
@@ -69,4 +69,38 @@ public class ClassFile
             workbook.Close();
         }
     }
+}
+
+public class FileCSV
+{
+    public static void Open_CSV(string name_eng, Dictionary<string, string> config)
+    {
+        StreamReader sr = new StreamReader(Directory.GetCurrentDirectory() + "\\Работа\\2. Отчеты\\1. Ежедневный\\4. Простои и сервис\\2022\\09. Сентябрь\\Исходники из 1С_Сентябрь 2022" + "\\" + config["ExcelWorkBook_" + name_eng] + ".csv");
+        String line = sr.ReadLine()!;
+
+        while (line != null)
+        {
+            line = sr.ReadLine()!;
+            while (line != "" & line != null)
+            {
+                string[] slist = line!.Split(';');
+                for (int i = 0; i < slist.Length; i++)
+                {
+                    if (slist[i] == "")
+                    {
+                        slist[i] = null!;
+                    }
+                }
+                Database.ClassDatabase.Insert(name_eng, slist);
+                line = sr.ReadLine()!;
+            }
+            line = sr.ReadLine()!;
+        }
+        sr.Close();
+    }
+}
+
+public class FileTXT
+{
+
 }

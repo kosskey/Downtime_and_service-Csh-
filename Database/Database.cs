@@ -33,29 +33,54 @@ public class ClassDatabase
         }
     }
     
-    public static void Insert()
+    public static void Insert(string name_eng, string[] slist)
     {
-        using (var connection = new SqliteConnection("Data Source=D:\\IT\\Development\\GitHub\\kosskey\\Downtime_and_service-Csh-\\Downtime_and_service\\database2.db"))
+        using (var connection = new SqliteConnection("Data Source=" + Directory.GetCurrentDirectory() + "\\database.db"))
         {
             connection.Open();
             
             using (var transaction = connection.BeginTransaction())
             {
                 var command = connection.CreateCommand();
-                command.CommandText =
-                @"
-                    INSERT INTO NewTable
-                    VALUES ($value, $value2)
-                ";
-
-                var parameter = command.CreateParameter();
-                command.Parameters.AddWithValue("$value", 4);
-                command.Parameters.AddWithValue("$value2", 4);
                 
+                if (name_eng == "operators_CA")
+                {
+                    command.CommandText =
+                    @"
+                        INSERT INTO Operators_CA
+                        VALUES ($ID, $Date, $City, $Plan, $Fact, $Report_i, $Plan_execute)
+                    ";
+                }
+                else if (name_eng == "operators_CC")
+                {
+                    command.CommandText =
+                    @"
+                        INSERT INTO Operators_CC
+                        VALUES ($ID, $Date, $City, $Plan, $Fact, $Report_i, $Plan_execute)
+                    ";
+                }
+                else if (name_eng == "technician")
+                {
+                    command.CommandText =
+                    @"
+                        INSERT INTO Technician
+                        VALUES ($ID, $Date, $City, $Plan, $Fact, $Report_i, $Plan_execute)
+                    ";
+                }
+
+                command.Parameters.AddWithValue("$ID", Convert.ToDateTime(slist[1]).Ticks / 1000000000 + slist[0]);
+                command.Parameters.AddWithValue("$Date", slist[1]);
+                command.Parameters.AddWithValue("$City", slist[0]);
+                command.Parameters.AddWithValue("$Plan", Convert.ToInt32(slist[2]));
+                command.Parameters.AddWithValue("$Fact", Convert.ToInt32(slist[3]));
+                command.Parameters.AddWithValue("$Report_i", Convert.ToInt32(slist[4]));
+                command.Parameters.AddWithValue("$Plan_execute", Convert.ToInt32(slist[7]));
+
+                //var parameter = command.CreateParameter();
                 //parameter.ParameterName = "$value";
                 //command.Parameters.Add(parameter);
-                
                 //parameter.Value = "4, 4";
+
                 command.ExecuteNonQuery();
 
                 transaction.Commit();
