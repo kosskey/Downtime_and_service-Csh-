@@ -49,16 +49,25 @@ class ClassProgram
                 //Database.ClassDatabase.Open();
                 //Database.ClassDatabase.Insert();
 
-                TypeFile.FileCSV.Open_CSV("operators_CA", config);
-                TypeFile.FileCSV.Open_CSV("operators_CC", config);
-                TypeFile.FileCSV.Open_CSV("technician", config);
+
 
                 excel = TypeFile.FileXLSX.Start_Excel();
+
+                //TypeFile.FileCSV.Convert_XLSX_to_CSV(excel,);
+
 
                 operators_CA_config = new TypeFile.FileXLSX("operators_CA", config, date);
                 excelWorkBook_operators_CA = operators_CA_config.Open_file(excel);
                 var save_format = Excel.XlFileFormat.xlCSV;
-                excelWorkBook_operators_CA.SaveAs("q1", save_format);
+                excelWorkBook_operators_CA.SaveAs(operators_CA_config.name_rus + ".csv", save_format);
+
+
+                TypeFile.FileCSV.Open_CSV("operators_CA", config);
+                TypeFile.FileCSV.Open_CSV("operators_CC", config);
+                TypeFile.FileCSV.Open_CSV("technician", config);
+
+
+
                 
 
             }

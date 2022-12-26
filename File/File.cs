@@ -73,6 +73,11 @@ public class FileXLSX
 
 public class FileCSV
 {
+    public static void Convert_XLSX_to_CSV(Excel.Application excel)
+    {
+        //var workbook = excel.Workbooks.Open();
+    }
+    
     public static void Open_CSV(string name_eng, Dictionary<string, string> config)
     {
         StreamReader sr = new StreamReader(Directory.GetCurrentDirectory() + "\\Работа\\2. Отчеты\\1. Ежедневный\\4. Простои и сервис\\2022\\09. Сентябрь\\Исходники из 1С_Сентябрь 2022" + "\\" + config["ExcelWorkBook_" + name_eng] + ".csv");
