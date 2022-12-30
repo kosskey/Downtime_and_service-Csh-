@@ -2,13 +2,13 @@ namespace Downtime_and_service;
 
 class ClassWorkbook
 {
-    public static void Report_create(Date.ClassDate date, Excel.Application excel, TypeFile.FileXLSX report_config, Excel.Workbook excelWorkBook_report)
+    public static void Report_create(Date.ClassDate date, Excel.Application excel, Excel.Workbook excelWorkBook_report)
     {
-        var excelWorkSheet_rating = report_config.Activate_sheet(excelWorkBook_report, "Источник Рейтинг");
+        var excelWorkSheet_rating = Files.FileXLSX.Activate_sheet(excelWorkBook_report, "Источник Рейтинг");
         excelWorkSheet_rating.Visible = Excel.XlSheetVisibility.xlSheetVisible;
         excel.Run("Выкладки");
 
-        var excelWorkSheet_install = report_config.Activate_sheet(excelWorkBook_report, "Установочные");
+        var excelWorkSheet_install = Files.FileXLSX.Activate_sheet(excelWorkBook_report, "Установочные");
         string? amount_line_old_start = (string)excelWorkSheet_install.Range["B2"].Text;
         string? amount_line_old_end = Convert.ToString(Int32.Parse(amount_line_old_start) - 13);
         string? amount_line_next_start = Convert.ToString(Convert.ToInt32(amount_line_old_start) + 1);
@@ -21,8 +21,8 @@ class ClassWorkbook
         DateTime date_val = Convert.ToDateTime(date.d_full);
         excelWorkSheet_rating.Range["B" + amount_line_next_start + ":B" + amount_line_next_end].Value = date_val;
     }
-
-    public static void Report_copy(Date.ClassDate date, Excel.Application excel, TypeFile.FileXLSX report_config, Excel.Workbook excelWorkBook_report, Excel.Workbook excelWorkBook_rating)
+/*
+    public static void Report_copy(Date.ClassDate date, Excel.Application excel, Excel.Workbook excelWorkBook_report, Excel.Workbook excelWorkBook_rating)
     {
         if (excel != null & report_config != null & excelWorkBook_report != null & excelWorkBook_rating != null)
         {
@@ -123,4 +123,5 @@ class ClassWorkbook
             excelWorkBook_sources_and_rating.Save();
         }
     }
+*/    
 }

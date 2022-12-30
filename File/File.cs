@@ -1,38 +1,42 @@
-﻿namespace TypeFile;
+﻿namespace Files;
 
-public class FileXLSX
+public class Path
 {
-    //private readonly Excel.Application ExcelObj = Start_Excel();
-    //private readonly Excel.Application ExcelObj;
-
     private readonly string name_eng;
-    public readonly string name_rus;
-    private readonly string link_file;
-    private readonly string full_link;
-    public readonly string save_link;
-
-    public FileXLSX(string name_eng, Dictionary<string, string> config, Date.ClassDate date)
+    private readonly string name_rus;
+    private readonly string file_name;
+    public readonly string path_file;
+    public readonly string path_report_for_save;
+    
+    public Path(string name_eng, Dictionary<string, string> config, Date.ClassDate date, string filename_extension = null!)
     {
         this.name_eng = "ExcelWorkBook_" + name_eng;
         name_rus = config[this.name_eng];
 
         if (name_eng == "report")
         {
-            link_file = config[this.name_eng] + config["date_previous_report"] + ".xlsm";
+            file_name = config[this.name_eng] + config["date_previous_report"] + ".xlsm";
         }
         else if (name_eng == "rating")
         {
-            link_file = config[this.name_eng] + date.month_name[date.month] + " " + date.yaer + ".xlsx";
+            file_name = config[this.name_eng] + date.month_name[date.month] + " " + date.yaer + ".txt";
+        }
+        else if (name_eng == "not_connection" || name_eng == "not_work")
+        {
+            file_name = config["folder"] + date.month_name[date.month] + " " + date.yaer + "\\" + config[this.name_eng] + ".txt";
         }
         else
         {
-            link_file = config["folder"] + date.month_name[date.month] + " " + date.yaer + "\\" + config[this.name_eng] + ".xlsx";
+            file_name = config["folder"] + date.month_name[date.month] + " " + date.yaer + "\\" + config[this.name_eng] + "." + filename_extension;
         }
 
-        full_link = config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + link_file;
-        save_link = config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + "Отчет по простоям и сервису_" + config["date_current_report"] + ".xlsm";
+        path_file = config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + file_name;
+        path_report_for_save = config["path_directory"] + date.yaer + "\\" + date.month + ". " + date.month_name[date.month] + "\\" + "Отчет по простоям и сервису_" + config["date_current_report"] + ".xlsm";
     }
+}
 
+public class FileXLSX
+{
     public static Excel.Application Start_Excel()
     {
         var excelObj = new Excel.Application();
@@ -41,14 +45,14 @@ public class FileXLSX
         return excelObj;
     }
 
-    public Excel.Workbook Open_file(Excel.Application excel)
+    public static Excel.Workbook Open_file(Excel.Application excel, string path_open)
     {
-        var workbook = excel.Workbooks.Open(full_link);
+        var workbook = excel.Workbooks.Open(path_open);
 
         return workbook;
     }
 
-    public Excel.Worksheet Activate_sheet(Excel.Workbook workbook, string name_sheet)
+    public static Excel.Worksheet Activate_sheet(Excel.Workbook workbook, string name_sheet)
     {
         var worksheet = (Excel.Worksheet)workbook.Sheets.Item[name_sheet];
         
@@ -73,14 +77,29 @@ public class FileXLSX
 
 public class FileCSV
 {
-    public static void Convert_XLSX_to_CSV(Excel.Application excel)
+    /*
+    public static void Convert_ANSI_UTF8(string name_eng, Dictionary<string, string> config, Files.Path save_link)
     {
-        //var workbook = excel.Workbooks.Open();
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+        StreamReader sr = new StreamReader(save_link + config["ExcelWorkBook_" + name_eng] + ".csv", System.Text.Encoding.GetEncoding("Windows-1251"));
+        StreamWriter sw = new StreamWriter(save_link + config["ExcelWorkBook_" + name_eng] + "2.csv", true, System.Text.Encoding.UTF8);
+
+        var line = sr.ReadLine();
+        while (line != null)
+        {
+            line = sr.ReadLine();
+            sw.WriteLine(line);
+        }
+
+        sr.Close();
+        sw.Close();
     }
+    */
     
-    public static void Open_CSV(string name_eng, Dictionary<string, string> config)
+    public static void Open_CSV(string name_eng, Dictionary<string, string> config, string path_file)
     {
-        StreamReader sr = new StreamReader(Directory.GetCurrentDirectory() + "\\Работа\\2. Отчеты\\1. Ежедневный\\4. Простои и сервис\\2022\\09. Сентябрь\\Исходники из 1С_Сентябрь 2022" + "\\" + config["ExcelWorkBook_" + name_eng] + ".csv");
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+        StreamReader sr = new StreamReader(path_file, System.Text.Encoding.GetEncoding("Windows-1251"));
         String line = sr.ReadLine()!;
 
         while (line != null)
@@ -96,7 +115,7 @@ public class FileCSV
                         slist[i] = null!;
                     }
                 }
-                Database.ClassDatabase.Insert(name_eng, slist);
+                Database.ClassDatabase.Insert(name_eng, slist, null!, config["date_current_report"]);
                 line = sr.ReadLine()!;
             }
             line = sr.ReadLine()!;
@@ -107,5 +126,24 @@ public class FileCSV
 
 public class FileTXT
 {
+    public static void Open_TXT(string name_eng, Dictionary<string, string> config, string path_file)
+    {
+        StreamReader sr = new StreamReader(path_file);
+        String line = sr.ReadLine()!;
 
+        while (line != null)
+        {
+            if (line != "" )
+            {
+                string[] slist = line!.Split(' ');
+                string slist2 = sr.ReadLine()!;
+
+                Database.ClassDatabase.Insert(name_eng, slist, slist2, config["date_current_report"]);
+            }
+            line = sr.ReadLine()!;
+        }
+        line = sr.ReadLine()!;
+
+        sr.Close();
+    }
 }

@@ -10,23 +10,15 @@ class ClassProgram
         Excel.Application? excel = null;
 
         Excel.Workbook? excelWorkBook_report = null;
-        Excel.Workbook? excelWorkBook_operators_CA = null;
-        Excel.Workbook? excelWorkBook_operators_CC = null;
-        Excel.Workbook? excelWorkBook_technician = null;
-        Excel.Workbook? excelWorkBook_revenue = null;
-        Excel.Workbook? excelWorkBook_amount = null;
-        Excel.Workbook? excelWorkBook_not_connection = null;
-        Excel.Workbook? excelWorkBook_not_work = null;
-        Excel.Workbook? excelWorkBook_rating = null;
 
-        TypeFile.FileXLSX? report_config = null;
-        TypeFile.FileXLSX? operators_CA_config = null;
-        TypeFile.FileXLSX? operators_CC_config = null;
-        TypeFile.FileXLSX? technician_config = null;
-        TypeFile.FileXLSX? revenue_config = null;
-        TypeFile.FileXLSX? amount_config = null;
-        TypeFile.FileXLSX? not_connection_config = null;
-        TypeFile.FileXLSX? not_work_config = null;
+        Files.Path? report_path = null;
+        Files.Path? operators_CA_path_csv = null;
+        Files.Path? operators_CC_path_csv = null;
+        Files.Path? technician_path_csv = null;
+        Files.Path? revenue_path_csv = null;
+        Files.Path? amount_path_csv = null;
+        Files.Path? not_connection_path = null;
+        Files.Path? not_work_path = null;
 
         Console.WriteLine("Дата текущего отчета: " + config["date_current_report"]);
         Console.WriteLine("Дата предыдущего отчета: " + config["date_previous_report"]);
@@ -46,33 +38,82 @@ class ClassProgram
 
             if (v == "1")
             {
-                //Database.ClassDatabase.Open();
-                //Database.ClassDatabase.Insert();
-
-
-
-                excel = TypeFile.FileXLSX.Start_Excel();
-
-                //TypeFile.FileCSV.Convert_XLSX_to_CSV(excel,);
-
-
-                operators_CA_config = new TypeFile.FileXLSX("operators_CA", config, date);
-                excelWorkBook_operators_CA = operators_CA_config.Open_file(excel);
                 var save_format = Excel.XlFileFormat.xlCSV;
-                excelWorkBook_operators_CA.SaveAs(operators_CA_config.name_rus + ".csv", save_format);
 
+                excel = Files.FileXLSX.Start_Excel();
 
-                TypeFile.FileCSV.Open_CSV("operators_CA", config);
-                TypeFile.FileCSV.Open_CSV("operators_CC", config);
-                TypeFile.FileCSV.Open_CSV("technician", config);
+                var operators_CA_path_xlsx = new Files.Path("operators_CA", config, date, "xlsx");
+                operators_CA_path_csv = new Files.Path("operators_CA", config, date, "csv");
+                var excelWorkBook_operators_CA = Files.FileXLSX.Open_file(excel, operators_CA_path_xlsx.path_file);
+                excelWorkBook_operators_CA.SaveAs(operators_CA_path_csv.path_file, FileFormat:Excel.XlFileFormat.xlCSV, Local:true);
+                excelWorkBook_operators_CA.Close(SaveChanges:false);
+                //TypeFile.FileCSV.Convert_ANSI_UTF8("operators_CA", config, save_link);
 
+                var operators_CC_path_xlsx = new Files.Path("operators_CC", config, date, "xlsx");
+                operators_CC_path_csv = new Files.Path("operators_CC", config, date, "csv");
+                var excelWorkBook_operators_CC = Files.FileXLSX.Open_file(excel, operators_CC_path_xlsx.path_file);
+                excelWorkBook_operators_CC.SaveAs(operators_CC_path_csv.path_file, save_format, Local:true);
+                excelWorkBook_operators_CC.Close(SaveChanges:false);
 
+                var technician_path_xlsx = new Files.Path("technician", config, date, "xlsx");
+                technician_path_csv = new Files.Path("technician", config, date, "csv");
+                var excelWorkBook_technician = Files.FileXLSX.Open_file(excel, technician_path_xlsx.path_file);
+                excelWorkBook_technician.SaveAs(technician_path_csv.path_file, save_format, Local:true);
+                excelWorkBook_technician.Close(SaveChanges:false);
 
-                
+                var revenue_path_xlsx = new Files.Path("revenue", config, date, "xlsx");
+                revenue_path_csv = new Files.Path("revenue", config, date, "csv");
+                var excelWorkBook_revenue = Files.FileXLSX.Open_file(excel, revenue_path_xlsx.path_file);
+                excelWorkBook_revenue.SaveAs(revenue_path_csv.path_file, save_format, Local:true);
+                excelWorkBook_revenue.Close(SaveChanges:false);
 
+                var amount_path_xlsx = new Files.Path("amount", config, date, "xlsx");
+                amount_path_csv = new Files.Path("amount", config, date, "csv");
+                var excelWorkBook_amount = Files.FileXLSX.Open_file(excel, amount_path_xlsx.path_file);
+                excelWorkBook_amount.SaveAs(amount_path_csv.path_file, save_format, Local:true);
+                excelWorkBook_amount.Close(SaveChanges:false);
             }
             else if(v == "2")
             {
+                report_path = new Files.Path("report", config, date);
+                excelWorkBook_report = Files.FileXLSX.Open_file(excel!, report_path.path_file);
+                ClassWorkbook.Report_create(date, excel!, excelWorkBook_report);
+
+                Console.WriteLine("-- Файл Отчета открыт");
+            }
+            else if(v == "3")
+            {
+                Files.FileCSV.Open_CSV("operators_CA", config, operators_CA_path_csv!.path_file);
+                Files.FileCSV.Open_CSV("operators_CC", config, operators_CC_path_csv!.path_file);
+                Files.FileCSV.Open_CSV("technician", config, technician_path_csv!.path_file);
+                Files.FileCSV.Open_CSV("revenue", config, revenue_path_csv!.path_file);
+                Files.FileCSV.Open_CSV("amount", config, amount_path_csv!.path_file);
+
+                not_connection_path = new Files.Path("not_connection", config, date);
+                Files.FileTXT.Open_TXT("not_connection", config, not_connection_path!.path_file);
+                not_work_path = new Files.Path("not_work", config, date);
+                Files.FileTXT.Open_TXT("not_work", config, not_work_path!.path_file);
+            }
+            else if(v == "4")
+            {
+                Database.ClassDatabase.Extract("operators_CA");
+
+            }
+            else if (v == "5")
+            {
+
+            }
+            else if (v == "6")
+            {
+
+            }
+            else if (v == "7")
+            {
+
+            }
+            else
+            {
+                /*
                 ClassWorkbook.Sources_copy(date, operators_CA_config!, excelWorkBook_operators_CA!, excelWorkBook_report!, 3);
                 ClassWorkbook.Sources_copy(date, operators_CC_config!, excelWorkBook_operators_CC!, excelWorkBook_report!, 4);
                 ClassWorkbook.Sources_copy(date, technician_config!, excelWorkBook_technician!, excelWorkBook_report!, 5);
@@ -92,9 +133,8 @@ class ClassProgram
                 {
                     Console.WriteLine("-- Ошибка копирования, файлы отчета не открыты");
                 }
-            }
-            else if(v == "3")
-            {
+
+
                 ClassWorkbook.Report_save(excel!, report_config!, excelWorkBook_report!);
                 TypeFile.FileXLSX.Close_file(excelWorkBook_report!);
 
@@ -131,9 +171,10 @@ class ClassProgram
                 {
                     Console.WriteLine("-- Ошибка сохранения, файлы отчета не открыты");
                 }
-            }
-            else if(v == "4")
-            {
+
+
+
+
                 //System.Diagnostics.Process ExcelProcess = new System.Diagnostics.Process();
 
                 var Ex = System.Diagnostics.Process.GetProcessesByName("EXCEL");
@@ -143,59 +184,7 @@ class ClassProgram
                 }
                 
                 break;
-            }
-            else if (v == "5")
-            {
-
-            }
-            else if (v == "6")
-            {
-
-            }
-            else if (v == "7")
-            {
-
-
-                report_config = new TypeFile.FileXLSX("report", config, date);
-                excelWorkBook_report = report_config.Open_file(excel!);
-                ClassWorkbook.Report_create(date, excel!, report_config, excelWorkBook_report);
-
-                operators_CA_config = new TypeFile.FileXLSX("operators_CA", config, date);
-                excelWorkBook_operators_CA = operators_CA_config.Open_file(excel!);
-                ClassWorkbook.Sources_create(date, operators_CA_config, excelWorkBook_operators_CA);
-
-                operators_CC_config = new TypeFile.FileXLSX("operators_CC", config, date);
-                excelWorkBook_operators_CC = operators_CC_config.Open_file(excel!);
-                ClassWorkbook.Sources_create(date, operators_CC_config, excelWorkBook_operators_CC);
-
-                technician_config = new TypeFile.FileXLSX("technician", config, date);
-                excelWorkBook_technician = technician_config.Open_file(excel!);
-                ClassWorkbook.Sources_create(date, technician_config, excelWorkBook_technician);
-
-                revenue_config = new TypeFile.FileXLSX("revenue", config, date);
-                excelWorkBook_revenue = revenue_config.Open_file(excel!);
-                ClassWorkbook.Sources_create(date, revenue_config, excelWorkBook_revenue);
-
-                amount_config = new TypeFile.FileXLSX("amount", config, date);
-                excelWorkBook_amount = amount_config.Open_file(excel!);
-                ClassWorkbook.Sources_create(date, amount_config, excelWorkBook_amount);
-
-                not_connection_config = new TypeFile.FileXLSX("not_connection", config, date);
-                excelWorkBook_not_connection = not_connection_config.Open_file(excel!);
-                ClassWorkbook.Sources_create(date, not_connection_config, excelWorkBook_not_connection);
-
-                not_work_config = new TypeFile.FileXLSX("not_work", config, date);
-                excelWorkBook_not_work = not_work_config.Open_file(excel!);
-                ClassWorkbook.Sources_create(date, not_work_config, excelWorkBook_not_work);
-
-                var rating_config = new TypeFile.FileXLSX("rating", config, date);
-                excelWorkBook_rating = rating_config.Open_file(excel!);
-                ClassWorkbook.Rating_create(date, excel!, rating_config, excelWorkBook_rating);
-
-                Console.WriteLine("-- Файлы открыты");
-
-
-
+                */
             }
         }
     }
